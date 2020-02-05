@@ -1,0 +1,15 @@
+.dub
+docs.json
+__dummy.html
+docs/
+/bindbc-raylib
+bindbc-raylib.so
+bindbc-raylib.dylib
+bindbc-raylib.dll
+bindbc-raylib.a
+bindbc-raylib.lib
+bindbc-raylib-test-*
+*.exe
+*.o
+*.obj
+*.lst

@@ -1,0 +1,19 @@
+name "bindbc-raylib"
+description "Dynamic and static bindings to raylib"
+homepage ""
+authors "Orfeo Da Vià"
+license "Boost"
+
+targetType "staticLibrary"
+targetPath "lib"
+targetName "BindBC_raylib"
+
+configuration "dynamic" {
+    dependency "bindbc-loader" version="~>0.2.1"
+}
+
+configuration "dynamicBC" {
+    dependency "bindbc-loader" version="~>0.2.1"
+    subConfiguration "bindbc-loader" "yesBC"
+    dflags "-betterC"
+}
