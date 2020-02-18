@@ -10,6 +10,15 @@ targetType "executable"
 configuration "basic" {
    targetName "basic_window"
    sourceFiles "basic_window.d"
+   libs "x11"
+   libs "raylib"
+   versions "RAYLIB261"
+   }
+
+configuration "basic25" {
+   targetName "basic_window"
+   sourceFiles "basic_window.d"
+   libs "x11"
    libs "raylib"
 }
 

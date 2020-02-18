@@ -272,6 +272,72 @@ version (BindRaylib_Static) {
 
       // Files management functions
       // Use D func!
+      //
+
+      /**
+       * Check if file exists
+       */
+      alias pFileExists = bool function(const(char)* fileName);
+      /**
+       * Check file extension
+       */
+      alias pIsFileExtension = bool function(const(char)* fileName, const(char)* ext);
+      /**
+       * Check if a directory path exists
+       */
+      alias pDirectoryExists = bool function(const(char)* dirPath);
+      /**
+       * Get pointer to extension for a filename string
+       */
+      alias pGetExtension = const(char)* function(const(char)* fileName);
+      /**
+       * Get pointer to filename for a path string
+       */
+      alias pGetFileName = const(char)* function(const(char)* filePath);
+      /**
+       * Get filename string without extension (uses static string)
+       */
+      alias pGetFileNameWithoutExt = const(char)* function(const(char)* filePath);
+      /**
+       * Get full path for a given fileName with path (uses static string)
+       */
+      alias pGetDirectoryPath = const(char)* function(const(char)* filePath);
+      /**
+       * Get previous directory path for a given path (uses static string)
+       */
+      alias pGetPrevDirectoryPath = const(char)* function(const(char)* dirPath);
+      /**
+       * Get current working directory (uses static string)
+       */
+      alias pGetWorkingDirectory = const(char)* function();
+      /**
+       * Get filenames in a directory path (memory should be freed)
+       */
+      alias pGetDirectoryFiles = char* function(const(char)* dirPath, int* count);
+      /**
+       * Clear directory files paths buffers (free memory)
+       */
+      alias pClearDirectoryFiles = void function();
+      /**
+       * Change working directory, returns true if success
+       */
+      alias pChangeDirectory = bool function(const(char)* dir);
+      /**
+       * Check if a file has been dropped into window
+       */
+      alias pIsFileDropped = bool function();
+      /**
+       * Get dropped files names (memory should be freed)
+       */
+      alias pGetDroppedFiles = char** function(int* count);
+      /**
+       * Clear dropped files paths buffer (free memory)
+       */
+      alias pClearDroppedFiles = void function();
+      /**
+       * Get file modification time (last write time)/
+       */
+      alias pGetFileModTime = long function(const(char)* fileName);
 
       //------------------------------------------------------------------------------------
       // Input Handling Functions
@@ -538,6 +604,23 @@ version (BindRaylib_Static) {
 
       pSetConfigFlags SetConfigFlags;
       pTakeScreenshot TakeScreenshot;
+
+      pFileExists FileExists;
+      pIsFileExtension IsFileExtension;
+      pDirectoryExists DirectoryExists;
+      pGetExtension GetExtension;
+      pGetFileName GetFileName;
+      pGetFileNameWithoutExt GetFileNameWithoutExt;
+      pGetDirectoryPath GetDirectoryPath;
+      pGetPrevDirectoryPath GetPrevDirectoryPath;
+      pGetWorkingDirectory GetWorkingDirectory;
+      pGetDirectoryFiles GetDirectoryFiles;
+      pClearDirectoryFiles ClearDirectoryFiles;
+      pChangeDirectory ChangeDirectory;
+      pIsFileDropped IsFileDropped;
+      pGetDroppedFiles GetDroppedFiles;
+      pClearDroppedFiles ClearDroppedFiles;
+      pGetFileModTime GetFileModTime;
 
       pIsKeyPressed IsKeyPressed;
       pIsKeyDown IsKeyDown;

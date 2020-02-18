@@ -1,13 +1,12 @@
 module bindbc.raylib.types;
 
-
 import core.stdc.config;
 import core.stdc.stdarg;
 import core.stdc.stdlib;
 
+//extern (C) @nogc nothrow:
 
-extern (C) @nogc nothrow:
-
+enum NULL = 0;
 enum PI = 3.14159265358979323846f;
 
 enum DEG2RAD = PI / 180.0f;
@@ -31,6 +30,16 @@ struct Color {
    ubyte g;
    ubyte b;
    ubyte a;
+}
+
+struct Point {
+   int x;
+   int y;
+}
+
+struct Size {
+   uint width;
+   uint height;
 }
 
 struct Vector2 {
@@ -73,7 +82,6 @@ struct Matrix {
    float m11;
    float m15;
 }
-
 
 struct Rectangle {
    float x;
@@ -709,4 +717,186 @@ enum NPatchType {
    NPT_9PATCH = 0, // Npatch defined by 3x3 tiles
    NPT_3PATCH_VERTICAL = 1, // Npatch defined by 1x3 tiles
    NPT_3PATCH_HORIZONTAL = 2 // Npatch defined by 3x1 tiles
+}
+
+// raygui
+//
+/// Place enums into the global space.  Example: Allows usage of both KeyboardKey.KEY_RIGHT and KEY_RIGHT.
+private string _enum(E...)() {
+   import std.format : formattedWrite;
+   import std.traits : EnumMembers;
+   import std.array : appender;
+
+   auto writer = appender!string;
+   static foreach (T; E) {
+      static foreach (member; EnumMembers!T) {
+         writer.formattedWrite("alias %s = " ~ T.stringof ~ ".%s;\n", member, member);
+      }
+   }
+   return writer.data;
+}
+
+mixin(_enum!(GuiControlState, GuiTextAlignment, GuiControl, GuiControlProperty, GuiDefaultProperty, GuiToggleProperty, GuiSliderProperty, GuiCheckBoxProperty,
+      GuiComboBoxProperty, GuiDropdownBoxProperty, GuiTextBoxProperty, GuiSpinnerProperty, GuiScrollBarProperty,
+      GuiScrollBarSide, GuiListViewProperty, GuiColorPickerProperty));
+
+/**
+ *Number of standard controls
+ */
+enum NUM_CONTROLS = 16;
+/**
+ *Number of standard properties
+ */
+enum NUM_PROPS_DEFAULT = 16;
+/**
+ *Number of extended properties
+ */
+enum NUM_PROPS_EXTENDED = 8;
+/**
+ *Text edit controls cursor blink timming
+ */
+enum TEXTEDIT_CURSOR_BLINK_FRAMES = 20;
+
+// Style property
+struct GuiStyleProp {
+   ushort controlId;
+   ushort propertyId;
+   int propertyValue;
+}
+
+/// Gui control state
+enum GuiControlState {
+   GUI_STATE_NORMAL = 0,
+   GUI_STATE_FOCUSED = 1,
+   GUI_STATE_PRESSED = 2,
+   GUI_STATE_DISABLED = 3
+}
+
+/// Gui control text alignment
+enum GuiTextAlignment {
+   GUI_TEXT_ALIGN_LEFT = 0,
+   GUI_TEXT_ALIGN_CENTER = 1,
+   GUI_TEXT_ALIGN_RIGHT = 2
+}
+
+/// Gui controls
+enum GuiControl {
+   DEFAULT = 0,
+   LABEL = 1, // LABELBUTTON
+   BUTTON = 2, // IMAGEBUTTON
+   TOGGLE = 3, // TOGGLEGROUP
+   SLIDER = 4, // SLIDERBAR
+   PROGRESSBAR = 5,
+   CHECKBOX = 6,
+   COMBOBOX = 7,
+   DROPDOWNBOX = 8,
+   TEXTBOX = 9, // TEXTBOXMULTI
+   VALUEBOX = 10,
+   SPINNER = 11,
+   LISTVIEW = 12,
+   COLORPICKER = 13,
+   SCROLLBAR = 14,
+   RESERVED = 15
+}
+
+/// Gui base properties for every control
+enum GuiControlProperty {
+   BORDER_COLOR_NORMAL = 0,
+   BASE_COLOR_NORMAL = 1,
+   TEXT_COLOR_NORMAL = 2,
+   BORDER_COLOR_FOCUSED = 3,
+   BASE_COLOR_FOCUSED = 4,
+   TEXT_COLOR_FOCUSED = 5,
+   BORDER_COLOR_PRESSED = 6,
+   BASE_COLOR_PRESSED = 7,
+   TEXT_COLOR_PRESSED = 8,
+   BORDER_COLOR_DISABLED = 9,
+   BASE_COLOR_DISABLED = 10,
+   TEXT_COLOR_DISABLED = 11,
+   BORDER_WIDTH = 12,
+   INNER_PADDING = 13,
+   TEXT_ALIGNMENT = 14,
+   RESERVED02 = 15
+}
+
+// Gui extended properties depend on control
+// NOTE: We reserve a fixed size of additional properties per control
+/// DEFAULT properties
+enum GuiDefaultProperty {
+   TEXT_SIZE = 16,
+   TEXT_SPACING = 17,
+   LINE_COLOR = 18,
+   BACKGROUND_COLOR = 19
+}
+
+/// Toggle / ToggleGroup
+enum GuiToggleProperty {
+   GROUP_PADDING = 16
+}
+
+/// Slider / SliderBar
+enum GuiSliderProperty {
+   SLIDER_WIDTH = 16,
+   TEXT_PADDING = 17
+}
+
+/// CheckBox
+enum GuiCheckBoxProperty {
+   CHECK_TEXT_PADDING = 16
+}
+
+/// ComboBox
+enum GuiComboBoxProperty {
+   SELECTOR_WIDTH = 16,
+   SELECTOR_PADDING = 17
+}
+
+/// DropdownBox
+enum GuiDropdownBoxProperty {
+   ARROW_RIGHT_PADDING = 16
+}
+
+/// TextBox / TextBoxMulti / ValueBox / Spinner
+enum GuiTextBoxProperty {
+   MULTILINE_PADDING = 16,
+   COLOR_SELECTED_FG = 17,
+   COLOR_SELECTED_BG = 18
+}
+
+enum GuiSpinnerProperty {
+   SELECT_BUTTON_WIDTH = 16,
+   SELECT_BUTTON_PADDING = 17,
+   SELECT_BUTTON_BORDER_WIDTH = 18
+}
+
+/// ScrollBar
+enum GuiScrollBarProperty {
+   ARROWS_SIZE = 16,
+   SLIDER_PADDING = 17,
+   SLIDER_SIZE = 18,
+   SCROLL_SPEED = 19,
+   SHOW_SPINNER_BUTTONS = 20
+}
+
+/// ScrollBar side
+enum GuiScrollBarSide {
+   SCROLLBAR_LEFT_SIDE = 0,
+   SCROLLBAR_RIGHT_SIDE = 1
+}
+
+/// ListView
+enum GuiListViewProperty {
+   ELEMENTS_HEIGHT = 16,
+   ELEMENTS_PADDING = 17,
+   SCROLLBAR_WIDTH = 18,
+   SCROLLBAR_SIDE = 19 // This property defines vertical scrollbar side (SCROLLBAR_LEFT_SIDE or SCROLLBAR_RIGHT_SIDE)
+}
+
+/// ColorPicker
+enum GuiColorPickerProperty {
+   COLOR_SELECTOR_SIZE = 16,
+   BAR_WIDTH = 17, // Lateral bar width
+   BAR_PADDING = 18, // Lateral bar separation from panel
+   BAR_SELECTOR_HEIGHT = 19, // Lateral bar selector height
+   BAR_SELECTOR_PADDING = 20 // Lateral bar selector outer padding
 }

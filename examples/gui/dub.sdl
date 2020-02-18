@@ -1,0 +1,15 @@
+name "core"
+description "Core - Basic window"
+authors "o3o"
+copyright "Copyright © 2020, o3o"
+dependency "bindbc-raylib" path="../.."
+targetType "executable"
+versions "RAYLIB261" "RAYGUI"
+
+// dub -ccts
+configuration "cts" {
+   targetName "cts"
+   sourceFiles "controls_test_suite.d"
+   libs "x11"
+   libs "raylib"
+}
