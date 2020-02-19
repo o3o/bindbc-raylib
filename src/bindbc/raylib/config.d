@@ -3,11 +3,11 @@ module bindbc.raylib.config;
 enum RaylibSupport {
    noLibrary,
    badLibrary,
-   raylib25,
-   raylib261
+   raylib250,
+   raylib260
 }
 
-version (RAYLIB_261)
-   enum raylibSupport = RaylibSupport.raylib261;
+version (RAYLIB_260)
+   enum raylibSupport = RaylibSupport.raylib260;
 else
-   enum raylibSupport = RaylibSupport.raylib25;
+   enum raylibSupport = RaylibSupport.raylib250;

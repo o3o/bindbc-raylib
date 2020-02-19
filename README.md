@@ -10,7 +10,7 @@ $ git clone https://github.com/raysan5/raylib.git
 1. Compile shared library (see [raylib wiki](https://github.com/raysan5/raylib/wiki))
 ```
 $ make RAYLIB_LIBTYPE=SHARED
-$ sudo make install
+$ sudo make install RAYLIB_LIBTYPE=SHARED
 ```
 
 ### Compile with [raygui](https://github.com/raysan5/raygui)
@@ -20,42 +20,33 @@ $ sudo make install
 $ git clone https://github.com/raysan5/raygui.git
 ```
 
-1. Copy `raygui/src/*.h` to `raylib/src`
-
+2. Copy `raygui/src/*.h` to `raylib/src`
 ```
 $ cd raygui
 $ cp src/*.h ../raylib/src
 ```
 
-1. Modify `src/Makefile` (see [raylib issue 1103](https://github.com/raysan5/raylib/issues/1103))
+3. Modify `raylib/src/Makefile` in order to add icons support:
 ```
-@@ -571,11 +571,13 @@ raudio.o : raudio.c raylib.h
-
- # Compile raygui module
- # NOTE: raygui header should be distributed with raylib.h
-
--raygui.o : raygui.c raygui.h
--       @echo #define RAYGUI_IMPLEMENTATION > raygui.c
--       @echo #include "$(RAYLIB_MODULE_RAYGUI_PATH)/raygui.h" > raygui.c
-+raygui.o : raygui.c raygui.h gui_textbox_extended.h ricons.h
+@@ -575,6 +575,7 @@ raygui.o : raygui.c raygui.h gui_textbox_extended.h ricons.h
         $(CC) -c $< $(CFLAGS) $(INCLUDE_PATHS) -D$(PLATFORM) -DRAYGUI_IMPLEMENTATION
+ raygui.c:
+        echo '#define RAYGUI_IMPLEMENTATION' > raygui.c
++       echo '#define RAYGUI_SUPPORT_ICONS' >> raygui.c
+        echo '#include "$(RAYLIB_MODULE_RAYGUI_PATH)/raygui.h"' >> raygui.c
 
-+raygui.c:
-+       echo '#define RAYGUI_IMPLEMENTATION' > raygui.c
-+       echo '#include "$(RAYLIB_MODULE_RAYGUI_PATH)/raygui.h"' >> raygui.c
 ```
 
-1. Compile with raygui support (`RAYLIB_MODULE_RAYGUI=TRUE`)
+4. Compile with raygui support (`RAYLIB_MODULE_RAYGUI=TRUE`)
 ```
 $ make PLATFORM=PLATFORM_DESKTOP RAYLIB_LIBTYPE=SHARED RAYLIB_MODULE_RAYGUI=TRUE
 ```
 
-In order to use raygui support, add
+In order to use raygui in your projects, add:
 ```
 versions "RAYGUI"
 ```
-to your dub file (see `)xamples/gui`)
-
+to your dub file (see `examples/gui`)
 
 ## Add `bindbc-raylib` to your project
 Add the package as a dependency in your `dub.json` or `dub.sdl` package description:
@@ -73,7 +64,7 @@ dependency "bindbc-raylib" version="~>0.1.0"
 ```
 
 ## Enable `raygui`
-To enable raygui  add the `versions` to your dub file
+To enable raygui add `versions` to your dub file
 
 __dub.json__
 ```
@@ -84,7 +75,7 @@ __dub.json__
 
 __dub.sdl__
 ```
-versions "RAYLIB261" "RAYGUI"
+versions "RAYLIB260" "RAYGUI"
 ```
 
 ## Enable support for raylib versions
@@ -93,17 +84,17 @@ Raylib versions can be configured by adding the appropriate version to a `versio
 | raylib Version | Version ID |
 | ---            | ---        |
 | 2.5.0          | Default    |
-| 2.6.1          | RAYLIB261  |
+| 2.6.0          | RAYLIB260  |
 
 
 __dub.json__
 ```
-"versions": [ "RAYLIB261" ],
+"versions": [ "RAYLIB260" ],
 ```
 
 __dub.sdl__
 ```
-versions "RAYLIB261"
+versions "RAYLIB260"
 ```
 
 ## Examples
@@ -111,7 +102,3 @@ You can find original raylib examples ported to D inside examples directory.
 
 ## Dependencies
 - [bindbc-loader](https://github.com/BindBC/bindbc-loader)
-
-
-
-

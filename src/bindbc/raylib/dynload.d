@@ -279,10 +279,10 @@ RaylibSupport loadRaylib(const(char)* libName) {
    if (errorCount() != errCount) {
       loadedVersion = RaylibSupport.badLibrary;
    } else {
-      loadedVersion = RaylibSupport.raylib25;
+      loadedVersion = RaylibSupport.raylib250;
    }
 
-   static if (raylibSupport == RaylibSupport.raylib261) {
+   static if (raylibSupport == RaylibSupport.raylib260) {
       // altri bind
       lib.bindSymbol(cast(void**)&GetWindowPosition, "GetWindowPosition");
       lib.bindSymbol(cast(void**)&ColorFromNormalized, "ColorFromNormalized");
@@ -294,9 +294,8 @@ RaylibSupport loadRaylib(const(char)* libName) {
       if (errorCount() != errCount) {
          loadedVersion = RaylibSupport.badLibrary;
       } else {
-         loadedVersion = RaylibSupport.raylib261;
+         loadedVersion = RaylibSupport.raylib260;
       }
    }
-
    return loadedVersion;
 }
