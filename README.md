@@ -1,6 +1,8 @@
 # bindbc-raylib
 This project provides both static (WIP) and dynamic bindings to the [raylib](https://raylib.com/).
 
+Based on commit 19390eaf097f2f78b7af188ece92f73388381cb6 of raylib
+
 ## Compile raylib
 1. Clone `raylib`:
 ```

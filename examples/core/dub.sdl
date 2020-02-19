@@ -12,8 +12,8 @@ configuration "basic" {
    sourceFiles "basic_window.d"
    libs "x11"
    libs "raylib"
-   versions "RAYLIB261"
-   }
+   versions "RAYLIB260"
+}
 
 configuration "basic25" {
    targetName "basic_window"

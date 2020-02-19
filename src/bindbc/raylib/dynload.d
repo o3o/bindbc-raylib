@@ -437,13 +437,14 @@ RaylibSupport loadRaylib(const(char)* libName) {
    lib.bindSymbol(cast(void**)&ToggleVrMode, "ToggleVrMode");
    lib.bindSymbol(cast(void**)&BeginVrDrawing, "BeginVrDrawing");
    lib.bindSymbol(cast(void**)&EndVrDrawing, "EndVrDrawing");
+
    // audio
    lib.bindSymbol(cast(void**)&InitAudioDevice, "InitAudioDevice");
    lib.bindSymbol(cast(void**)&CloseAudioDevice, "CloseAudioDevice");
    lib.bindSymbol(cast(void**)&IsAudioDeviceReady, "IsAudioDeviceReady");
    lib.bindSymbol(cast(void**)&SetMasterVolume, "SetMasterVolume");
    lib.bindSymbol(cast(void**)&LoadWave, "LoadWave");
-   lib.bindSymbol(cast(void**)&LoadWaveEx, "LoadWaveEx");
+   // FIX: will be removed lib.bindSymbol(cast(void**)&LoadWaveEx, "LoadWaveEx");
    lib.bindSymbol(cast(void**)&LoadSound, "LoadSound");
    lib.bindSymbol(cast(void**)&LoadSoundFromWave, "LoadSoundFromWave");
    lib.bindSymbol(cast(void**)&UpdateSound, "UpdateSound");
@@ -481,7 +482,7 @@ RaylibSupport loadRaylib(const(char)* libName) {
    lib.bindSymbol(cast(void**)&InitAudioStream, "InitAudioStream");
    lib.bindSymbol(cast(void**)&UpdateAudioStream, "UpdateAudioStream");
    lib.bindSymbol(cast(void**)&CloseAudioStream, "CloseAudioStream");
-   lib.bindSymbol(cast(void**)&IsAudioBufferProcessed, "IsAudioBufferProcessed");
+   // FIX: lib.bindSymbol(cast(void**)&IsAudioBufferProcessed, "IsAudioBufferProcessed");
    lib.bindSymbol(cast(void**)&PlayAudioStream, "PlayAudioStream");
    lib.bindSymbol(cast(void**)&PauseAudioStream, "PauseAudioStream");
    lib.bindSymbol(cast(void**)&ResumeAudioStream, "ResumeAudioStream");
@@ -537,8 +538,16 @@ RaylibSupport loadRaylib(const(char)* libName) {
       lib.bindSymbol(cast(void**)&GuiLoadStyle, "GuiLoadStyle");
       lib.bindSymbol(cast(void**)&GuiLoadStyleDefault, "GuiLoadStyleDefault");
       lib.bindSymbol(cast(void**)&GuiIconText, "GuiIconText");
+      // Gui icons functionality
+      lib.bindSymbol(cast(void**)&GuiDrawIcon, "GuiDrawIcon");
+      lib.bindSymbol(cast(void**)&GuiGetIcons, "GuiGetIcons");
+      lib.bindSymbol(cast(void**)&GuiGetIconData, "GuiGetIconData");
+      lib.bindSymbol(cast(void**)&GuiSetIconData, "GuiSetIconData");
+      lib.bindSymbol(cast(void**)&GuiSetIconPixel, "GuiSetIconPixel");
+      lib.bindSymbol(cast(void**)&GuiClearIconPixel, "GuiClearIconPixel");
+      lib.bindSymbol(cast(void**)&GuiCheckIconPixel, "GuiCheckIconPixel");
+      lib.bindSymbol(cast(void**)&GuiColorBarAlpha, "GuiColorBarAlpha");
    }
-
 
    if (errorCount() != errCount) {
       loadedVersion = RaylibSupport.badLibrary;

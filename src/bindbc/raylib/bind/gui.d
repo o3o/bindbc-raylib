@@ -204,6 +204,34 @@ version (BindRaylib_Static) {
        * Get text with icon id prepended (if supported)
        */
       alias pGuiIconText = const(char)* function(int iconId, const(char)* text);
+
+      alias pGuiDrawIcon = void function(int iconId, Vector2 position, int pixelSize, Color color);
+      /**
+       * Get full icons data pointer
+       */
+      alias pGuiGetIcons = uint* function();
+      /**
+       * Get icon bit data
+       */
+      alias pGuiGetIconData = uint* function(int iconId);
+      /**
+       * Set icon bit data
+       */
+      alias pGuiSetIconData = void function(int iconId, uint* data);
+      /**
+       * Set icon pixel value
+       */
+      alias pGuiSetIconPixel = void function(int iconId, int x, int y);
+      /**
+       * Clear icon pixel value
+       */
+      alias pGuiClearIconPixel = void function(int iconId, int x, int y);
+      /**
+       * Check icon pixel value
+       */
+      alias pGuiCheckIconPixel = bool function(int iconId, int x, int y);
+
+      alias pGuiColorBarAlpha = float function(Rectangle bounds, float alpha);
    }
 
    __gshared {
@@ -252,5 +280,14 @@ version (BindRaylib_Static) {
       pGuiLoadStyle GuiLoadStyle;
       pGuiLoadStyleDefault GuiLoadStyleDefault;
       pGuiIconText GuiIconText;
+
+      pGuiDrawIcon       GuiDrawIcon       ;
+      pGuiGetIcons       GuiGetIcons       ;
+      pGuiGetIconData    GuiGetIconData    ;
+      pGuiSetIconData    GuiSetIconData    ;
+      pGuiSetIconPixel   GuiSetIconPixel   ;
+      pGuiClearIconPixel GuiClearIconPixel ;
+      pGuiCheckIconPixel GuiCheckIconPixel ;
+      pGuiColorBarAlpha  GuiColorBarAlpha;
    }
 }

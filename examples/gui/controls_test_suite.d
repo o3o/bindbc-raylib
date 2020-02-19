@@ -42,7 +42,6 @@ void main(string[] args) {
       //If you do need to pass a string to a C function that will be modified,
       //just dup it to a variable of type char[] and then pass that on to the C function.
 
-      char[] textBoxText = "Text box\0".dup;
       //string textBoxText = "Text box";
       bool textBoxEditMode = false;
 
@@ -59,7 +58,6 @@ void main(string[] args) {
       bool multiTextBoxEditMode = false;
       Color colorPickerValue = RED;
 
-      int sliderValue = 50;
       int sliderBarValue = 60;
       float progressValue = 0.4f;
 
@@ -81,7 +79,6 @@ void main(string[] args) {
       bool exitWindow = false;
       bool showMessageBox = false;
 
-      char[256] textInput;
       bool showTextInputBox = false;
 
       char[256] textInputFileName;
@@ -120,50 +117,60 @@ void main(string[] args) {
 
          // raygui: controls drawing
          //----------------------------------------------------------------------------------
-         if (dropDown000EditMode || dropDown001EditMode)
+         if (dropDown000EditMode || dropDown001EditMode) {
             GuiLock();
-         //GuiDisable();
+         }
 
          // First GUI column
          //GuiSetStyle(CHECKBOX, TEXT_ALIGNMENT, GUI_TEXT_ALIGN_LEFT);
          forceSquaredChecked = GuiCheckBox(Rectangle(25, 108, 15, 15), "FORCE CHECK!", forceSquaredChecked);
 
-         /+
-      GuiSetStyle(GuiControl.TEXTBOX, TEXT_ALIGNMENT, GUI_TEXT_ALIGN_CENTER);
+      GuiSetStyle(GuiControl.TEXTBOX, GuiControlProperty.TEXT_ALIGNMENT, GuiTextAlignment.GUI_TEXT_ALIGN_CENTER);
          //GuiSetStyle(VALUEBOX, TEXT_ALIGNMENT, GUI_TEXT_ALIGN_LEFT);
-         if (GuiSpinner(Rectangle( 25, 135, 125, 30), NULL, &spinner001Value, 0, 100, spinnerEditMode)) spinnerEditMode = !spinnerEditMode;
-      if (GuiValueBox(Rectangle( 25, 175, 125, 30), NULL, &valueBox002Value, 0, 100, valueBoxEditMode)) valueBoxEditMode = !valueBoxEditMode;
-      +/
-         GuiSetStyle(GuiControl.TEXTBOX, GuiControlProperty.TEXT_ALIGNMENT, GuiTextAlignment.GUI_TEXT_ALIGN_LEFT);
-         if (GuiTextBox(Rectangle(25, 215, 125, 30), textBoxText.ptr, 64, textBoxEditMode)) {
-            textBoxEditMode = !textBoxEditMode;
+         if (GuiSpinner(Rectangle(25, 135, 125, 30), "", &spinner001Value, 0, 100, spinnerEditMode)) {
+            spinnerEditMode = !spinnerEditMode;
          }
+         if (GuiValueBox(Rectangle(25, 175, 125, 30), "", &valueBox002Value, 0, 100, valueBoxEditMode)) {
+            valueBoxEditMode = !valueBoxEditMode;
+         }
+         GuiSetStyle(GuiControl.TEXTBOX, GuiControlProperty.TEXT_ALIGNMENT, GuiTextAlignment.GUI_TEXT_ALIGN_LEFT);
+         /+
+            fix
+            char[64] textBoxText = "Text box\0";
+         if (GuiTextBox(Rectangle(25, 215, 125, 30), textBoxText.ptr, 67, textBoxEditMode)) {
+            textBoxEditMode = !textBoxEditMode;
+            tracef("edit mode %s", textBoxEditMode);
+         }
+         +/
 
          GuiSetStyle(BUTTON, TEXT_ALIGNMENT, GUI_TEXT_ALIGN_CENTER);
 
-         if (GuiButton(Rectangle( 25, 255, 125, 30), GuiIconText(GuiIconName.RICON_FILE_SAVE, "Save File"))) showTextInputBox = true;
+         if (GuiButton(Rectangle(25, 255, 125, 30), GuiIconText(GuiIconName.RICON_FILE_SAVE, "Save File"))) {
+            showTextInputBox = true;
+         }
          GuiGroupBox(Rectangle(25, 310, 125, 150), "STATES");
          GuiLock();
-         GuiSetState(GUI_STATE_NORMAL);
+         GuiSetState(GuiControlState.GUI_STATE_NORMAL);
          if (GuiButton(Rectangle(30, 320, 115, 30), "NORMAL")) {
          }
-         GuiSetState(GUI_STATE_FOCUSED);
+         GuiSetState(GuiControlState.GUI_STATE_FOCUSED);
          if (GuiButton(Rectangle(30, 355, 115, 30), "FOCUSED")) {
          }
-         GuiSetState(GUI_STATE_PRESSED);
+         GuiSetState(GuiControlState.GUI_STATE_PRESSED);
          if (GuiButton(Rectangle(30, 390, 115, 30), "#15#PRESSED")) {
          }
-         GuiSetState(GUI_STATE_DISABLED);
+         GuiSetState(GuiControlState.GUI_STATE_DISABLED);
          if (GuiButton(Rectangle(30, 425, 115, 30), "DISABLED")) {
          }
-         GuiSetState(GUI_STATE_NORMAL);
+         GuiSetState(GuiControlState.GUI_STATE_NORMAL);
          GuiUnlock();
          comboBoxActive = GuiComboBox(Rectangle(25, 470, 125, 30), "ONE;TWO;THREE;FOUR", comboBoxActive);
 
          // NOTE: GuiDropdownBox must draw after any other control that can be covered on unfolding
          GuiSetStyle(DROPDOWNBOX, TEXT_ALIGNMENT, GUI_TEXT_ALIGN_LEFT);
-         if (GuiDropdownBox(Rectangle(25, 65, 125, 30), "#01#ONE;#02#TWO;#03#THREE;#04#FOUR", &dropdownBox001Active, dropDown001EditMode))
+         if (GuiDropdownBox(Rectangle(25, 65, 125, 30), "#01#ONE;#02#TWO;#03#THREE;#04#FOUR", &dropdownBox001Active, dropDown001EditMode)) {
             dropDown001EditMode = !dropDown001EditMode;
+         }
 
          GuiSetStyle(DROPDOWNBOX, TEXT_ALIGNMENT, GUI_TEXT_ALIGN_CENTER);
          if (GuiDropdownBox(Rectangle(25, 25, 125, 30), "ONE;TWO;THREE", &dropdownBox000Active, dropDown000EditMode))
@@ -177,51 +184,71 @@ void main(string[] args) {
                &listViewExScrollIndex, listViewExActive);
 
          toggleGroupActive = GuiToggleGroup(Rectangle(165, 400, 140, 25), "#1#ONE\n#3#TWO\n#8#THREE\n#23#", toggleGroupActive);
-         /+
 
       // Third GUI column
-      if (GuiTextBoxMulti(Rectangle( 320, 25, 225, 140), multiTextBoxText, 141, multiTextBoxEditMode)) multiTextBoxEditMode = !multiTextBoxEditMode;
-      colorPickerValue = GuiColorPicker(Rectangle( 320, 185, 196, 192), colorPickerValue);
+      if (GuiTextBoxMulti(Rectangle(320, 25, 225, 140), multiTextBoxText.ptr, 141, multiTextBoxEditMode)) {
+         multiTextBoxEditMode = !multiTextBoxEditMode;
+      }
+      colorPickerValue = GuiColorPicker(Rectangle(320, 185, 196, 192), colorPickerValue);
 
-      sliderValue = GuiSlider(Rectangle( 355, 400, 165, 20), "TEST", TextFormat("%2.2f", (float)sliderValue), sliderValue, -50, 100);
-      sliderBarValue = GuiSliderBar(Rectangle( 320, 430, 200, 20), NULL, TextFormat("%i", (int)sliderBarValue), sliderBarValue, 0, 100);
-      progressValue = GuiProgressBar(Rectangle( 320, 460, 200, 20), NULL, NULL, progressValue, 0, 1);
+      //C sliderValue = GuiSlider(Rectangle( 355, 400, 165, 20), "TEST", TextFormat("%2.2f", (float)sliderValue), sliderValue, -50, 100);
+      int sliderValue = 50;
+      // FIX doesn't work
+      sliderValue = cast(int)GuiSlider(Rectangle( 355, 400, 165, 20), "TEST", TextFormat("%2.2f", cast(float)sliderValue), sliderValue, -50, 100);
+      sliderBarValue = cast(int)GuiSliderBar(Rectangle(320, 430, 200, 20), "", TextFormat("%i", cast(int)sliderBarValue), sliderBarValue, 0, 100);
+      progressValue = GuiProgressBar(Rectangle(320, 460, 200, 20), "", "", progressValue, 0, 1);
 
       // NOTE: View rectangle could be used to perform some scissor test
-      Rectangle view = GuiScrollPanel(Rectangle( 560, 25, 100, 160), Rectangle( 560, 25, 200, 400), &viewScroll);
+      Rectangle view = GuiScrollPanel(Rectangle(560, 25, 100, 160), Rectangle(560, 25, 200, 400), &viewScroll);
 
-      GuiStatusBar(Rectangle( 0, GetScreenHeight() - 20, GetScreenWidth(), 20), "This is a status bar");
+      GuiStatusBar(Rectangle(0, GetScreenHeight() - 20, GetScreenWidth(), 20), "This is a status bar");
 
-      alphaValue = GuiColorBarAlpha(Rectangle( 320, 490, 200, 30), alphaValue);
+      alphaValue = GuiColorBarAlpha(Rectangle(320, 490, 200, 30), alphaValue);
 
-      if (showMessageBox)
-      {
+      if (showMessageBox) {
          DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), Fade(RAYWHITE, 0.8f));
-         int result = GuiMessageBox(Rectangle( GetScreenWidth()/2 - 125, GetScreenHeight()/2 - 50, 250, 100), GuiIconText(RICON_EXIT, "Close Window"), "Do you really want to exit?", "Yes;No");
+         int result = GuiMessageBox(Rectangle(GetScreenWidth()/2 - 125, GetScreenHeight()/2 - 50, 250, 100),
+               GuiIconText(GuiIconName.RICON_EXIT, "Close Window"),
+               "Do you really want to exit?",
+               "Yes;No");
 
-         if ((result == 0) || (result == 2)) showMessageBox = false;
-         else if (result == 1) exitWindow = true;
+         if ((result == 0) || (result == 2)) {
+            showMessageBox = false;
+         } else if (result == 1) {
+            exitWindow = true;
+         }
       }
 
-      if (showTextInputBox)
-      {
+      if (showTextInputBox) {
          DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), Fade(RAYWHITE, 0.8f));
-         int result = GuiTextInputBox(Rectangle( GetScreenWidth()/2 - 120, GetScreenHeight()/2 - 60, 240, 140), GuiIconText(RICON_FILE_SAVE, "Save file as..."), "Introduce a save file name", "Ok;Cancel", textInput);
+         /+
+         string ti;
+         int result = guiTextInputBox(Rectangle(GetScreenWidth()/2 - 120, GetScreenHeight()/2 - 60, 240, 140),
+               //GuiIconText(GuiIconName.RICON_FILE_SAVE, "Save file as..."),
+               "CUL",
+               "Introduce a save file name",
+               "Ok;Cancel",
+               ti);
++/
 
-         if (result == 1)
-         {
+   // keep in mind that the .init value of a char is 0xFF , not 0
+   char[256] textInput = '\0';
+         int result = GuiTextInputBox(Rectangle(GetScreenWidth()/2 - 120, GetScreenHeight()/2 - 60, 240, 140),
+               //GuiIconText(GuiIconName.RICON_FILE_SAVE, "Save file as..."),
+               "CUL".toStringz,
+               "Introduce a save file name".toStringz,
+               "Ok;Cancel".toStringz,
+               textInput.ptr);
+         if (result == 1) {
             // TODO: Validate textInput value and save
-
-            strcpy(textInputFileName, textInput);
+            //fix strcpy(textInputFileName, textInput);
          }
 
-         if ((result == 0) || (result == 1) || (result == 2))
-         {
+         if ((result == 0) || (result == 1) || (result == 2)) {
             showTextInputBox = false;
-            strcpy(textInput, "\0");
+            // FIX: strcpy(textInput, "\0");
          }
       }
-      +/
 
          GuiUnlock();
          EndDrawing();
