@@ -4,7 +4,7 @@ This project provides both static (WIP) and dynamic bindings to the [raylib](htt
 ## Compile raylib
 1. Clone `raylib`:
 ```
-$ git clone https://github.com/raysan5/raygui.git
+$ git clone https://github.com/raysan5/raylib.git
 ```
 
 1. Compile shared library (see [raylib wiki](https://github.com/raysan5/raylib/wiki))
