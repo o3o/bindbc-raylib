@@ -1,5 +1,5 @@
 # bindbc-raylib
-This project provides both static (WIP) and dynamic bindings to the [raylib](https://raylib.org/).
+This project provides both static (WIP) and dynamic bindings to the [raylib](https://raylib.com/).
 
 ## Compile raylib
 1. Clone `raylib`:
@@ -7,14 +7,13 @@ This project provides both static (WIP) and dynamic bindings to the [raylib](htt
 $ git clone https://github.com/raysan5/raylib.git
 ```
 
-1. Compile shared library (see [raylib wiki](https://github.com/raysan5/raylib/wiki))
+2. Compile shared library (see [raylib wiki](https://github.com/raysan5/raylib/wiki))
 ```
 $ make RAYLIB_LIBTYPE=SHARED
 $ sudo make install RAYLIB_LIBTYPE=SHARED
 ```
 
 ### Compile with [raygui](https://github.com/raysan5/raygui)
-
 1. Clone `raygui`:
 ```
 $ git clone https://github.com/raysan5/raygui.git
@@ -34,7 +33,6 @@ $ cp src/*.h ../raylib/src
         echo '#define RAYGUI_IMPLEMENTATION' > raygui.c
 +       echo '#define RAYGUI_SUPPORT_ICONS' >> raygui.c
         echo '#include "$(RAYLIB_MODULE_RAYGUI_PATH)/raygui.h"' >> raygui.c
-
 ```
 
 4. Compile with raygui support (`RAYLIB_MODULE_RAYGUI=TRUE`)
