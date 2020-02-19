@@ -98,12 +98,12 @@ Raylib versions can be configured by adding the appropriate version to a `versio
 
 __dub.json__
 ```
-"versions": [ "RAYLIB216" ],
+"versions": [ "RAYLIB261" ],
 ```
 
 __dub.sdl__
 ```
-versions "RAYLIB216"
+versions "RAYLIB261"
 ```
 
 ## Examples
