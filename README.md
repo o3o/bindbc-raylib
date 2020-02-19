@@ -45,7 +45,7 @@ $ cp src/*.h ../raylib/src
 +       echo '#include "$(RAYLIB_MODULE_RAYGUI_PATH)/raygui.h"' >> raygui.c
 ```
 
-1. Compile with raygui support (`RAYLIB_MODULE_RAYGUI=TREU`)
+1. Compile with raygui support (`RAYLIB_MODULE_RAYGUI=TRUE`)
 ```
 $ make PLATFORM=PLATFORM_DESKTOP RAYLIB_LIBTYPE=SHARED RAYLIB_MODULE_RAYGUI=TRUE
 ```
