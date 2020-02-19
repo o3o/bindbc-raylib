@@ -4,7 +4,7 @@ This project provides both static (WIP) and dynamic bindings to the [raylib](htt
 ## Compile raylib
 1. Clone `raylib`:
 ```
-$ git clone https://github.com/raysan5/raygui.git
+$ git clone https://github.com/raysan5/raylib.git
 ```
 
 1. Compile shared library (see [raylib wiki](https://github.com/raysan5/raylib/wiki))
@@ -45,7 +45,7 @@ $ cp src/*.h ../raylib/src
 +       echo '#include "$(RAYLIB_MODULE_RAYGUI_PATH)/raygui.h"' >> raygui.c
 ```
 
-1. Compile with raygui support (`RAYLIB_MODULE_RAYGUI=TREU`)
+1. Compile with raygui support (`RAYLIB_MODULE_RAYGUI=TRUE`)
 ```
 $ make PLATFORM=PLATFORM_DESKTOP RAYLIB_LIBTYPE=SHARED RAYLIB_MODULE_RAYGUI=TRUE
 ```
@@ -98,12 +98,12 @@ Raylib versions can be configured by adding the appropriate version to a `versio
 
 __dub.json__
 ```
-"versions": [ "RAYLIB216" ],
+"versions": [ "RAYLIB261" ],
 ```
 
 __dub.sdl__
 ```
-versions "RAYLIB216"
+versions "RAYLIB261"
 ```
 
 ## Examples
