@@ -274,6 +274,7 @@ RaylibSupport loadRaylib(const(char)* libName) {
       lib.bindSymbol(cast(void**)&GuiColorPicker, "GuiColorPicker");
       lib.bindSymbol(cast(void**)&GuiLoadStyle, "GuiLoadStyle");
       lib.bindSymbol(cast(void**)&GuiLoadStyleDefault, "GuiLoadStyleDefault");
+      lib.bindSymbol(cast(void**)&GuiIconText, "GuiIconText");
    }
    if (errorCount() != errCount) {
       loadedVersion = RaylibSupport.badLibrary;

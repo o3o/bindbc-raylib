@@ -12,6 +12,7 @@ public {
    import bindbc.raylib.colors;
    import bindbc.raylib.config;
    import bindbc.raylib.dynload;
+   import bindbc.raylib.ricons;
    import bindbc.raylib.types;
    import bindbc.raylib.wrapper;
 }

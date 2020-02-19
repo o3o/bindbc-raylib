@@ -43,6 +43,7 @@ void main(string[] args) {
       //just dup it to a variable of type char[] and then pass that on to the C function.
 
       char[] textBoxText = "Text box\0".dup;
+      //string textBoxText = "Text box";
       bool textBoxEditMode = false;
 
       int listViewScrollIndex = 0;
@@ -133,15 +134,14 @@ void main(string[] args) {
          if (GuiSpinner(Rectangle( 25, 135, 125, 30), NULL, &spinner001Value, 0, 100, spinnerEditMode)) spinnerEditMode = !spinnerEditMode;
       if (GuiValueBox(Rectangle( 25, 175, 125, 30), NULL, &valueBox002Value, 0, 100, valueBoxEditMode)) valueBoxEditMode = !valueBoxEditMode;
       +/
-         GuiSetStyle(TEXTBOX, TEXT_ALIGNMENT, GUI_TEXT_ALIGN_LEFT);
-         if (GuiTextBox(Rectangle(25, 215, 125, 30), textBoxText.ptr, 64, textBoxEditMode))
+         GuiSetStyle(GuiControl.TEXTBOX, GuiControlProperty.TEXT_ALIGNMENT, GuiTextAlignment.GUI_TEXT_ALIGN_LEFT);
+         if (GuiTextBox(Rectangle(25, 215, 125, 30), textBoxText.ptr, 64, textBoxEditMode)) {
             textBoxEditMode = !textBoxEditMode;
+         }
 
          GuiSetStyle(BUTTON, TEXT_ALIGNMENT, GUI_TEXT_ALIGN_CENTER);
-         /+
 
-      if (GuiButton(Rectangle( 25, 255, 125, 30), GuiIconText(RICON_FILE_SAVE, "Save File"))) showTextInputBox = true;
-+/
+         if (GuiButton(Rectangle( 25, 255, 125, 30), GuiIconText(GuiIconName.RICON_FILE_SAVE, "Save File"))) showTextInputBox = true;
          GuiGroupBox(Rectangle(25, 310, 125, 150), "STATES");
          GuiLock();
          GuiSetState(GUI_STATE_NORMAL);

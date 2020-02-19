@@ -200,7 +200,12 @@ version (BindRaylib_Static) {
        * Load style default over global style
        */
       alias pGuiLoadStyleDefault = void function();
+      /**
+       * Get text with icon id prepended (if supported)
+       */
+      alias pGuiIconText = const(char)* function(int iconId, const(char)* text);
    }
+
    __gshared {
       pGuiEnable GuiEnable;
       pGuiDisable GuiDisable;
@@ -246,5 +251,6 @@ version (BindRaylib_Static) {
       pGuiColorPicker GuiColorPicker;
       pGuiLoadStyle GuiLoadStyle;
       pGuiLoadStyleDefault GuiLoadStyleDefault;
+      pGuiIconText GuiIconText;
    }
 }
