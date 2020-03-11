@@ -1,7 +1,7 @@
 # bindbc-raylib
 This project provides both static (WIP) and dynamic bindings to the [raylib](https://raylib.com/).
 
-Based on commit 19390eaf097f2f78b7af188ece92f73388381cb6 of raylib
+Based on commit `117696a8936007592f7fe7c0b7b227a805e3b74a` of raylib.
 
 ## Compile raylib
 1. Clone `raylib`:
@@ -9,7 +9,13 @@ Based on commit 19390eaf097f2f78b7af188ece92f73388381cb6 of raylib
 $ git clone https://github.com/raysan5/raylib.git
 ```
 
-2. Compile shared library (see [raylib wiki](https://github.com/raysan5/raylib/wiki))
+2. (Optional), create a new branch `bindbc`
+```
+$ git checkout -b bindbc 117696a8936007592f7fe7c0b7b227a805e3b74a
+```
+
+
+3. Compile shared library (see [raylib wiki](https://github.com/raysan5/raylib/wiki))
 ```
 $ make RAYLIB_LIBTYPE=SHARED
 $ sudo make install RAYLIB_LIBTYPE=SHARED
@@ -40,13 +46,13 @@ $ cp src/*.h ../raylib/src
 4. Compile with raygui support (`RAYLIB_MODULE_RAYGUI=TRUE`)
 ```
 $ make PLATFORM=PLATFORM_DESKTOP RAYLIB_LIBTYPE=SHARED RAYLIB_MODULE_RAYGUI=TRUE
+$ sudo make install PLATFORM=PLATFORM_DESKTOP RAYLIB_LIBTYPE=SHARED RAYLIB_MODULE_RAYGUI=TRUE
 ```
 
 In order to use raygui in your projects, add:
 ```
 versions "RAYGUI"
 ```
-to your dub file (see `examples/gui`)
 
 ## Add `bindbc-raylib` to your project
 Add the package as a dependency in your `dub.json` or `dub.sdl` package description:
@@ -64,7 +70,7 @@ dependency "bindbc-raylib" version="~>0.1.0"
 ```
 
 ## Enable `raygui`
-To enable raygui add `versions` to your dub file
+To enable raygui add `versions` to your dub file  (see `examples/gui`)
 
 __dub.json__
 ```
