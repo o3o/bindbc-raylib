@@ -68,6 +68,9 @@ RaylibSupport loadRaylib(const(char)* libName) {
    }
 
    auto errCount = errorCount();
+   loadedVersion = RaylibSupport.badLibrary;
+
+
    lib.bindSymbol(cast(void**)&InitWindow, "InitWindow");
    lib.bindSymbol(cast(void**)&WindowShouldClose, "WindowShouldClose");
    lib.bindSymbol(cast(void**)&CloseWindow, "CloseWindow");
@@ -555,8 +558,7 @@ RaylibSupport loadRaylib(const(char)* libName) {
       loadedVersion = RaylibSupport.raylib250;
    }
 
-   static if (raylibSupport == RaylibSupport.raylib260) {
-      // altri bind
+   static if (raylibSupport >= RaylibSupport.raylib260) {
       lib.bindSymbol(cast(void**)&GetWindowPosition, "GetWindowPosition");
       lib.bindSymbol(cast(void**)&ColorFromNormalized, "ColorFromNormalized");
       lib.bindSymbol(cast(void**)&GetWorldToScreenEx, "GetWorldToScreenEx");
@@ -570,5 +572,17 @@ RaylibSupport loadRaylib(const(char)* libName) {
          loadedVersion = RaylibSupport.raylib260;
       }
    }
+
+   static if (raylibSupport >= RaylibSupport.raylib260) {
+      lib.bindSymbol(cast(void**)&IsWindowFocused, "IsWindowFocused");
+      lib.bindSymbol(cast(void**)&IsWindowFullscreen, "IsWindowFullscreen");
+      lib.bindSymbol(cast(void**)&GetWindowScaleDPI, "GetWindowScaleDPI");
+      if (errorCount() != errCount) {
+         loadedVersion = RaylibSupport.badLibrary;
+      } else {
+         loadedVersion = RaylibSupport.raylib260;
+      }
+   }
+
    return loadedVersion;
 }

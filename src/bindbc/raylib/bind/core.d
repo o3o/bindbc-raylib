@@ -29,6 +29,10 @@ version (BindRaylib_Static) {
        */
       alias pIsWindowMinimized = bool function();
       /**
+       * Check if window has been focused
+       */
+      alias pIsWindowFocused = bool function();
+      /**
        * Check if window has been resized
        */
       alias pIsWindowResized = bool function();
@@ -36,6 +40,11 @@ version (BindRaylib_Static) {
        * Check if window is currently hidden
        */
       alias pIsWindowHidden = bool function();
+
+      /**
+       * Check if window is currently fullscreen
+       */
+      alias pIsWindowFullScreen = bool function();
       /**
        * Toggle fullscreen mode (only PLATFORM_DESKTOP)
        */
@@ -108,6 +117,10 @@ version (BindRaylib_Static) {
        * Get window position XY on monitor
        */
       alias pGetWindowPosition = Vector2 function();
+      /**
+       * Get window scale DPI factor
+       */
+      alias pGetWindowScaleDPI = Vector2 function();
       /**
        * Get the human-readable, UTF-8 encoded name of the primary monitor
        */
@@ -545,8 +558,10 @@ version (BindRaylib_Static) {
       pCloseWindow CloseWindow;
       pIsWindowReady IsWindowReady;
       pIsWindowMinimized IsWindowMinimized;
+      pIsWindowFocused IsWindowFocused;
       pIsWindowResized IsWindowResized;
       pIsWindowHidden IsWindowHidden;
+      pIsWindowFullScreen IsWindowFullscreen;
       pToggleFullscreen ToggleFullscreen;
       pUnhideWindow UnhideWindow;
       pHideWindow HideWindow;
@@ -565,6 +580,7 @@ version (BindRaylib_Static) {
       pGetMonitorPhysicalWidth GetMonitorPhysicalWidth;
       pGetMonitorPhysicalHeight GetMonitorPhysicalHeight;
       pGetWindowPosition GetWindowPosition;
+      pGetWindowScaleDPI GetWindowScaleDPI;
       pGetMonitorName GetMonitorName;
       pGetClipboardText GetClipboardText;
       pSetClipboardText SetClipboardText;
@@ -602,6 +618,7 @@ version (BindRaylib_Static) {
       pGetColor GetColor;
       pFade Fade;
 
+      // Misc. functions
       pSetConfigFlags SetConfigFlags;
       pTakeScreenshot TakeScreenshot;
 
