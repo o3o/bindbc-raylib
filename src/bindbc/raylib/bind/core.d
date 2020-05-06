@@ -285,7 +285,6 @@ version (BindRaylib_Static) {
 
       // Files management functions
       // Use D func!
-      //
 
       /**
        * Check if file exists
@@ -584,6 +583,11 @@ version (BindRaylib_Static) {
       pGetMonitorName GetMonitorName;
       pGetClipboardText GetClipboardText;
       pSetClipboardText SetClipboardText;
+      pShowCursor ShowCursor;
+      pHideCursor HideCursor;
+      pIsCursorHidden IsCursorHidden;
+      pEnableCursor EnableCursor;
+      pDisableCursor DisableCursor;
 
       pClearBackground ClearBackground;
       pBeginDrawing BeginDrawing;

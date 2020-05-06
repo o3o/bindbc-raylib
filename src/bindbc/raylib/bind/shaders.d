@@ -10,7 +10,7 @@ version (BindRaylib_Static) {
       /**
        *  Load chars array from text file
        */
-      alias pLoadText = char* function(const(char)* fileName);
+      alias pLoadFileText = char* function(const(char)* fileName);
       /**
        * Load shader from files and bind default locations
        */
@@ -83,6 +83,26 @@ version (BindRaylib_Static) {
        */
       alias pGetMatrixProjection = Matrix function();
 
+      // Texture maps generation (PBR)
+      // NOTE: Required shaders should be provided
+
+      /**
+       * Generate cubemap texture from HDR texture
+       */
+      alias pGenTextureCubemap = Texture2D function(Shader shader, Texture2D map, int size);
+      /**
+       * Generate irradiance texture using cubemap data
+       */
+      alias pGenTextureIrradiance = Texture2D function(Shader shader, Texture2D cubemap, int size);
+      /**
+       * Generate prefilter texture using cubemap data
+       */
+      alias pGenTexturePrefilter = Texture2D function(Shader shader, Texture2D cubemap, int size);
+      /**
+       * Generate BRDF texture using cubemap data
+       */
+      alias pGenTextureBRDF = Texture2D function(Shader shader, int size);
+
       // Shading begin/end functions
       /**
        * Begin custom shader drawing
@@ -136,7 +156,7 @@ version (BindRaylib_Static) {
       alias pEndVrDrawing = void function();
    }
    __gshared {
-      pLoadText LoadText;
+      pLoadFileText LoadFileText;
       pLoadShader LoadShader;
       pLoadShaderCode LoadShaderCode;
       pUnloadShader UnloadShader;
@@ -154,6 +174,12 @@ version (BindRaylib_Static) {
       pSetMatrixModelview SetMatrixModelview;
       pGetMatrixModelview GetMatrixModelview;
       pGetMatrixProjection GetMatrixProjection;
+
+      pGenTextureCubemap GenTextureCubemap;
+      pGenTextureIrradiance GenTextureIrradiance;
+      pGenTexturePrefilter GenTexturePrefilter;
+      pGenTextureBRDF GenTextureBRDF;
+
       pBeginShaderMode BeginShaderMode;
       pEndShaderMode EndShaderMode;
       pBeginBlendMode BeginBlendMode;

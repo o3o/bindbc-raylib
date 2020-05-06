@@ -5,13 +5,12 @@ import loader = bindbc.loader.sharedlib;
 void main(string[] args) {
    RaylibSupport retVal = loadRaylib();
    if (retVal == RaylibSupport.badLibrary) {
-        foreach(info; loader.errors) {
-            // A hypothetical logging routine
-            writefln("e: %s, m:%s", info.error, info.message);
-        }
-      writeln("ERROR", retVal);
+      foreach(info; loader.errors) {
+         writefln("e: %s, m:%s", info.error, info.message);
+      }
+      writeln("ERROR: ", retVal);
    } else {
-      writeln(retVal);
+      writeln("VERIOSN: ", retVal);
       // Initialization
       enum SCREEN_WIDTH = 800;
       enum SCREEN_HEIGHT = 450;
@@ -23,7 +22,7 @@ void main(string[] args) {
       // Main game loop
       while (!WindowShouldClose()) {
          // Draw
-            BeginDrawing();
+         BeginDrawing();
          ClearBackground(GOLD);
          //DrawText("Congrats! You created your first window!", 190, 200, 20, LIGHTGRAY);
          EndDrawing();

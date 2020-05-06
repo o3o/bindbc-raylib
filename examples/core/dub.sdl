@@ -12,6 +12,13 @@ configuration "basic" {
    sourceFiles "basic_window.d"
    libs "x11"
    libs "raylib"
+   versions "RAYLIB300"
+}
+configuration "basic26" {
+   targetName "basic_window"
+   sourceFiles "basic_window.d"
+   libs "x11"
+   libs "raylib"
    versions "RAYLIB260"
 }
 
@@ -25,13 +32,17 @@ configuration "basic25" {
 configuration "mouse" {
    targetName "input_mouse"
    sourceFiles "input_mouse.d"
+   libs "x11"
    libs "raylib"
+   versions "RAYLIB300"
 }
 
 configuration "multi" {
    targetName "input_multitouch"
    sourceFiles "input_multitouch.d"
+   libs "x11"
    libs "raylib"
+   versions "RAYLIB300"
 }
 
 configuration "arm" {

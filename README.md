@@ -1,6 +1,5 @@
 # bindbc-raylib
 This project provides both static (WIP) and dynamic bindings to the [raylib](https://www.raylib.com/).
-Based on commit `117696a8936007592f7fe7c0b7b227a805e3b74a` of raylib.
 
 ## Compile raylib
 1. Clone `raylib`:
@@ -8,14 +7,9 @@ Based on commit `117696a8936007592f7fe7c0b7b227a805e3b74a` of raylib.
 $ git clone https://github.com/raysan5/raylib.git
 ```
 
-2. (Optional), create a new branch `bindbc`
+2. Compile shared library (see [raylib wiki](https://github.com/raysan5/raylib/wiki))
 ```
-$ git checkout -b bindbc 117696a8936007592f7fe7c0b7b227a805e3b74a
-```
-
-
-3. Compile shared library (see [raylib wiki](https://github.com/raysan5/raylib/wiki))
-```
+$ cd raylib/src
 $ make RAYLIB_LIBTYPE=SHARED
 $ sudo make install RAYLIB_LIBTYPE=SHARED
 ```
@@ -48,10 +42,6 @@ $ make PLATFORM=PLATFORM_DESKTOP RAYLIB_LIBTYPE=SHARED RAYLIB_MODULE_RAYGUI=TRUE
 $ sudo make install PLATFORM=PLATFORM_DESKTOP RAYLIB_LIBTYPE=SHARED RAYLIB_MODULE_RAYGUI=TRUE
 ```
 
-In order to use raygui in your projects, add:
-```
-versions "RAYGUI"
-```
 
 ## Add `bindbc-raylib` to your project
 Add the package as a dependency in your `dub.json` or `dub.sdl` package description:
@@ -86,10 +76,11 @@ versions "RAYLIB260" "RAYGUI"
 ## Enable support for raylib versions
 Raylib versions can be configured by adding the appropriate version to a `versions` directive in your dub file
 
-| raylib Version | Version ID |
-| ---            | ---        |
-| 2.5.0          | Default    |
-| 2.6.0          | RAYLIB260  |
+| raylib Version | raylib commit                              | Version ID |
+| ---            | ---                                        | ---        |
+| 2.5.0          |                                            | Default    |
+| 2.6.0          | `117696a8936007592f7fe7c0b7b227a805e3b74a` | RAYLIB260  |
+| 3.0.0          | `72443f8f25b1f8ded3b05da17857b7eeb1556b35` | RAYLIB300  |
 
 
 __dub.json__

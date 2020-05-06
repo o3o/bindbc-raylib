@@ -2,10 +2,62 @@
 
 
 ## [Unreleased]
+
+- Fix gui examples issue
+
+### ADDED
 - IsWindowFocused
 - IsWindowFullscreen
 - GetWindowScaleDPI
-- Fix gui example issue
+- ImageClearBackground
+- ImageDrawPixel
+- ImageDrawPixelV
+- ImageDrawLine
+- ImageDrawLineV
+- ImageDrawCircle
+- ImageDrawCircleV
+- ImageDrawRectangleV
+- ImageDrawRectangleRec
+- GenTextureCubemap
+- GenTextureIrradiance
+- GenTexturePrefilter
+- GenTextureBRDF
+- IsAudioStreamProcessed
+- SetAudioStreamBufferSizeDefault
+
+### NOT YET IMPLEMENTED
+- SetTraceLogLevel
+- SetTraceLogExit
+- SetTraceLogCallback
+- TraceLog
+- GetRandomValue
+- LoadFileData
+- SaveFileData
+- LoadFileText
+- SaveFileText
+- CompressData
+- DecompressData
+- SaveStorageValue
+- LoadStorageValue
+- OpenURL
+- GetGamepadName
+- LoadFileText
+- LoadImagePro
+- Struct Music, AudioStream...
+
+### REMOVED
+- LoadWaveEx
+
+### RENAMED
+- IsAudioBufferProcessed to IsAudioStreamProcessed
+- LoadText to LoadFileText
+
+
+### REDESIGNED:
+- struct Font, character rectangles have been moved out from CharInfo to Font
+- struct CharInfo, now includes directly an Image of the glyph
+- struct Font, now includes directly an Image of the glyph
+
 
 ## [0.2.0] - 2020-02-19
 - Add semver

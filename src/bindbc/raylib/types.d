@@ -1,5 +1,6 @@
 module bindbc.raylib.types;
 
+import bindbc.raylib.config;
 import core.stdc.config;
 import core.stdc.stdarg;
 import core.stdc.stdlib;
@@ -137,24 +138,44 @@ struct NPatchInfo {
    int type; // layout of the n-patch: 3x3, 1x3 or 3x1
 }
 
-// Font character info
-struct CharInfo {
-   int value; // Character value (Unicode)
-   Rectangle rec; // Character rectangle in sprite font
-   int offsetX; // Character offset X when drawing
-   int offsetY; // Character offset Y when drawing
-   int advanceX; // Character advance position X
-   ubyte* data; // Character pixel data (grayscale)
+
+static if (raylibSupport >= RaylibSupport.raylib300) {
+   struct CharInfo {
+      int value;              // Character value (Unicode)
+      int offsetX;            // Character offset X when drawing
+      int offsetY;            // Character offset Y when drawing
+      int advanceX;           // Character advance position X
+      Image image;            // Character image data
+   }
+} else  {
+   // Font character info
+   struct CharInfo {
+      int value; // Character value (Unicode)
+      Rectangle rec; // Character rectangle in sprite font
+      int offsetX; // Character offset X when drawing
+      int offsetY; // Character offset Y when drawing
+      int advanceX; // Character advance position X
+      ubyte* data; // Character pixel data (grayscale)
+   }
 }
 
 // Font type, includes texture and charSet array data
-struct Font {
-   Texture2D texture; // Font texture
-   int baseSize; // Base size (default chars height)
-   int charsCount; // Number of characters
-   CharInfo* chars; // Characters info data
+static if (raylibSupport >= RaylibSupport.raylib260) {
+   struct Font {
+      int baseSize;           // Base size (default chars height)
+      int charsCount;         // Number of characters
+      Texture2D texture;      // Characters texture atlas
+      Rectangle *recs;        // Characters rectangles in texture
+      CharInfo *chars;        // Characters info data
+   }
+} else {
+   struct Font {
+      Texture2D texture; // Font texture
+      int baseSize; // Base size (default chars height)
+      int charsCount; // Number of characters
+      CharInfo* chars; // Characters info data
+   }
 }
-
 alias SpriteFont = Font; // SpriteFont type fallback, defaults to Font
 
 // Camera type, defines a camera position/orientation in 3d space
@@ -299,10 +320,13 @@ struct Sound {
    int format; // Audio format specifier
 }
 
+// FIX: changend in reaylib 3..
 // Music type (file streaming from memory)
 // NOTE: Anything longer than ~10 seconds should be streamed
 struct MusicData;
 alias Music = MusicData*;
+
+// FIX: changend in reaylib 3..
 
 // Audio stream type
 // NOTE: Useful to create custom audio streams not bound to a specific file
@@ -737,8 +761,8 @@ private string _enum(E...)() {
 }
 
 mixin(_enum!(GuiControlState, GuiTextAlignment, GuiControl, GuiControlProperty, GuiDefaultProperty, GuiToggleProperty, GuiSliderProperty, GuiCheckBoxProperty,
-      GuiComboBoxProperty, GuiDropdownBoxProperty, GuiTextBoxProperty, GuiSpinnerProperty, GuiScrollBarProperty,
-      GuiScrollBarSide, GuiListViewProperty, GuiColorPickerProperty));
+         GuiComboBoxProperty, GuiDropdownBoxProperty, GuiTextBoxProperty, GuiSpinnerProperty, GuiScrollBarProperty,
+         GuiScrollBarSide, GuiListViewProperty, GuiColorPickerProperty));
 
 /**
  *Number of standard controls

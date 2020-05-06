@@ -5,7 +5,7 @@ authors "Orfeo Da Vià"
 license "Boost"
 
 targetType "staticLibrary"
-targetPath "lib"
+targetPath "bin"
 targetName "BindBC_raylib"
 
 configuration "dynamic" {

@@ -1,39 +1,49 @@
 import std.stdio;
-import raylib;
+import bindbc.raylib;
+import bindbc.loader.sharedlib : errors;
 
 void main(string[] args) {
-   // Initialization
-   enum SCREEN_WIDTH = 800;
-   enum SCREEN_HEIGHT = 450;
+   RaylibSupport retVal = loadRaylib();
+   if (retVal == RaylibSupport.badLibrary) {
+      foreach(info; errors) {
+         writefln("e: %s, m:%s", info.error, info.message);
+      }
+      writeln("ERROR: ", retVal);
+   } else {
 
-   InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "raylib [core] example - mouse input");
-   Vector2 ballPosition = Vector2(-100.0f, -100.0f);
-   Color ballColor = DARKBLUE;
+      // Initialization
+      enum SCREEN_WIDTH = 800;
+      enum SCREEN_HEIGHT = 450;
 
-   SetTargetFPS(60); // Set our game to run at 60 frames-per-second
+      InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "raylib [core] example - mouse input");
+      Vector2 ballPosition = Vector2(-100.0f, -100.0f);
+      Color ballColor = DARKBLUE;
 
-   // Main game loop
-   while (!WindowShouldClose()) {
-      ballPosition = GetMousePosition();
+      SetTargetFPS(60); // Set our game to run at 60 frames-per-second
 
-      if (IsMouseButtonPressed(MouseButton.MOUSE_LEFT_BUTTON)) {
-         ballColor = MAROON;
-      } else if (IsMouseButtonPressed(MouseButton.MOUSE_MIDDLE_BUTTON)) {
-         ballColor = LIME;
-      } else if (IsMouseButtonPressed(MouseButton.MOUSE_RIGHT_BUTTON)) {
-         ballColor = DARKBLUE;
+      // Main game loop
+      while (!WindowShouldClose()) {
+         ballPosition = GetMousePosition();
+
+         if (IsMouseButtonPressed(MouseButton.MOUSE_LEFT_BUTTON)) {
+            ballColor = MAROON;
+         } else if (IsMouseButtonPressed(MouseButton.MOUSE_MIDDLE_BUTTON)) {
+            ballColor = LIME;
+         } else if (IsMouseButtonPressed(MouseButton.MOUSE_RIGHT_BUTTON)) {
+            ballColor = DARKBLUE;
+         }
+
+         // Draw
+         BeginDrawing();
+
+         ClearBackground(RAYWHITE);
+         DrawCircleV(ballPosition, 40, ballColor);
+         DrawText("move ball with mouse and click mouse button to change color", 10, 10, 20, DARKGRAY);
+
+         EndDrawing();
       }
 
-      // Draw
-      BeginDrawing();
-
-      ClearBackground(RAYWHITE);
-      DrawCircleV(ballPosition, 40, ballColor);
-      DrawText("move ball with mouse and click mouse button to change color", 10, 10, 20, DARKGRAY);
-
-      EndDrawing();
+      // De-Initialization
+      CloseWindow(); // Close window and OpenGL context
    }
-
-   // De-Initialization
-   CloseWindow(); // Close window and OpenGL context
 }

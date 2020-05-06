@@ -72,6 +72,44 @@ version (BindRaylib_Static) {
        * Get image alpha border rectangle
        */
       alias pGetImageAlphaBorder = Rectangle function(Image image, float threshold);
+
+      // Image drawing functions
+      // NOTE: Image software-rendering functions (CPU)
+      alias pImageClearBackground = void function(Image* dst, Color color);
+
+      /**
+       * Draw pixel within an image
+       */
+      alias pImageDrawPixel = void function(Image* dst, int posX, int posY, Color color);
+      /**
+       * Draw pixel within an image (Vector version)
+       */
+      alias pImageDrawPixelV = void function(Image* dst, Vector2 position, Color color);
+      /**
+       * Draw line within an image
+       */
+      alias pImageDrawLine = void function(Image* dst, int startPosX, int startPosY, int endPosX, int endPosY, Color color);
+      /**
+       * Draw line within an image (Vector version)
+       */
+      alias pImageDrawLineV = void function(Image* dst, Vector2 start, Vector2 end, Color color);
+      /**
+       * Draw circle within an image
+       */
+      alias pImageDrawCircle = void function(Image* dst, int centerX, int centerY, int radius, Color color);
+      /**
+       * Draw circle within an image (Vector version)
+       */
+      alias pImageDrawCircleV = void function(Image* dst, Vector2 center, int radius, Color color);
+      /**
+       * Draw rectangle within an image (Vector version)
+       */
+      alias pImageDrawRectangleV = void function(Image* dst, Vector2 position, Vector2 size, Color color);
+      /**
+       * Draw rectangle within an image
+       */
+      alias pImageDrawRectangleRec = void function(Image* dst, Rectangle rec, Color color);
+
       /**
        * Get pixel data size in bytes (image or texture)
        */
@@ -259,6 +297,7 @@ version (BindRaylib_Static) {
        * Generate GPU mipmaps for a texture
        */
       alias pGenTextureMipmaps = void function(Texture2D* texture);
+
       /**
        * Set texture scaling filter mode
        */
@@ -267,7 +306,6 @@ version (BindRaylib_Static) {
        * Set texture wrapping mode
        */
       alias pSetTextureWrap = void function(Texture2D texture, int wrapMode);
-
 
       // Texture2D drawing functions
       /**
@@ -318,6 +356,17 @@ version (BindRaylib_Static) {
       pGetImageData GetImageData;
       pGetImageDataNormalized GetImageDataNormalized;
       pGetImageAlphaBorder GetImageAlphaBorder;
+
+      pImageClearBackground ImageClearBackground;
+      pImageDrawPixel ImageDrawPixel;
+      pImageDrawPixelV ImageDrawPixelV;
+      pImageDrawLine ImageDrawLine;
+      pImageDrawLineV ImageDrawLineV;
+      pImageDrawCircle ImageDrawCircle;
+      pImageDrawCircleV ImageDrawCircleV;
+      pImageDrawRectangleV ImageDrawRectangleV;
+      pImageDrawRectangleRec ImageDrawRectangleRec;
+
       pGetPixelDataSize GetPixelDataSize;
       pGetTextureData GetTextureData;
       pGetScreenData GetScreenData;
@@ -366,7 +415,6 @@ version (BindRaylib_Static) {
       pGenTextureMipmaps GenTextureMipmaps;
       pSetTextureFilter SetTextureFilter;
       pSetTextureWrap SetTextureWrap;
-
 
       pDrawTexture DrawTexture;
       pDrawTextureV DrawTextureV;

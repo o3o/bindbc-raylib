@@ -38,12 +38,8 @@ RaylibSupport loadRaylib() {
    version (Windows) {
       const(char)[][1] libNames = ["raylib.dll"];
    } else version (Posix) {
-      const(char)[][3] libNames = [
-         "libraylib.so",
-         "/usr/local/lib/libraylib.so" //make install PLATFORM=PLATFORM_DESKTOP RAYLIB_LIBTYPE=SHARED
-         , "/usr/lib/libraylib.so"
-
-      ];
+      const(char)[][3] libNames = ["libraylib.so", "/usr/local/lib/libraylib.so" //make install PLATFORM=PLATFORM_DESKTOP RAYLIB_LIBTYPE=SHARED
+      , "/usr/lib/libraylib.so"];
    } else {
       static assert(0, "bindbc-raylib is not yet supported on this platform");
    }
@@ -69,7 +65,6 @@ RaylibSupport loadRaylib(const(char)* libName) {
 
    auto errCount = errorCount();
    loadedVersion = RaylibSupport.badLibrary;
-
 
    lib.bindSymbol(cast(void**)&InitWindow, "InitWindow");
    lib.bindSymbol(cast(void**)&WindowShouldClose, "WindowShouldClose");
@@ -240,7 +235,7 @@ RaylibSupport loadRaylib(const(char)* libName) {
    //
    lib.bindSymbol(cast(void**)&LoadImage, "LoadImage");
    lib.bindSymbol(cast(void**)&LoadImageEx, "LoadImageEx");
-   lib.bindSymbol(cast(void**)&LoadImagePro, "LoadImagePro");
+   // FIX not in rayliob: lib.bindSymbol(cast(void**)&LoadImagePro, "LoadImagePro");
    lib.bindSymbol(cast(void**)&LoadImageRaw, "LoadImageRaw");
    lib.bindSymbol(cast(void**)&ExportImage, "ExportImage");
    lib.bindSymbol(cast(void**)&ExportImageAsCode, "ExportImageAsCode");
@@ -289,6 +284,7 @@ RaylibSupport loadRaylib(const(char)* libName) {
    lib.bindSymbol(cast(void**)&ImageColorGrayscale, "ImageColorGrayscale");
    lib.bindSymbol(cast(void**)&ImageColorContrast, "ImageColorContrast");
    lib.bindSymbol(cast(void**)&ImageColorBrightness, "ImageColorBrightness");
+
    lib.bindSymbol(cast(void**)&ImageColorReplace, "ImageColorReplace");
    lib.bindSymbol(cast(void**)&GenImageColor, "GenImageColor");
    lib.bindSymbol(cast(void**)&GenImageGradientV, "GenImageGradientV");
@@ -410,7 +406,6 @@ RaylibSupport loadRaylib(const(char)* libName) {
    lib.bindSymbol(cast(void**)&GetCollisionRayTriangle, "GetCollisionRayTriangle");
    lib.bindSymbol(cast(void**)&GetCollisionRayGround, "GetCollisionRayGround");
    // shaders
-   lib.bindSymbol(cast(void**)&LoadText, "LoadText");
    lib.bindSymbol(cast(void**)&LoadShader, "LoadShader");
    lib.bindSymbol(cast(void**)&LoadShaderCode, "LoadShaderCode");
    lib.bindSymbol(cast(void**)&UnloadShader, "UnloadShader");
@@ -447,11 +442,11 @@ RaylibSupport loadRaylib(const(char)* libName) {
    lib.bindSymbol(cast(void**)&IsAudioDeviceReady, "IsAudioDeviceReady");
    lib.bindSymbol(cast(void**)&SetMasterVolume, "SetMasterVolume");
    lib.bindSymbol(cast(void**)&LoadWave, "LoadWave");
-   // FIX: will be removed lib.bindSymbol(cast(void**)&LoadWaveEx, "LoadWaveEx");
    lib.bindSymbol(cast(void**)&LoadSound, "LoadSound");
    lib.bindSymbol(cast(void**)&LoadSoundFromWave, "LoadSoundFromWave");
    lib.bindSymbol(cast(void**)&UpdateSound, "UpdateSound");
    lib.bindSymbol(cast(void**)&UnloadWave, "UnloadWave");
+
    lib.bindSymbol(cast(void**)&UnloadSound, "UnloadSound");
    lib.bindSymbol(cast(void**)&ExportWave, "ExportWave");
    lib.bindSymbol(cast(void**)&ExportWaveAsCode, "ExportWaveAsCode");
@@ -485,7 +480,6 @@ RaylibSupport loadRaylib(const(char)* libName) {
    lib.bindSymbol(cast(void**)&InitAudioStream, "InitAudioStream");
    lib.bindSymbol(cast(void**)&UpdateAudioStream, "UpdateAudioStream");
    lib.bindSymbol(cast(void**)&CloseAudioStream, "CloseAudioStream");
-   // FIX: lib.bindSymbol(cast(void**)&IsAudioBufferProcessed, "IsAudioBufferProcessed");
    lib.bindSymbol(cast(void**)&PlayAudioStream, "PlayAudioStream");
    lib.bindSymbol(cast(void**)&PauseAudioStream, "PauseAudioStream");
    lib.bindSymbol(cast(void**)&ResumeAudioStream, "ResumeAudioStream");
@@ -496,6 +490,8 @@ RaylibSupport loadRaylib(const(char)* libName) {
 
    // gui
    version (RAYGUI) {
+      pragma(msg, "RAYGUI");
+
       lib.bindSymbol(cast(void**)&GuiEnable, "GuiEnable");
       lib.bindSymbol(cast(void**)&GuiDisable, "GuiDisable");
       lib.bindSymbol(cast(void**)&GuiLock, "GuiLock");
@@ -559,6 +555,9 @@ RaylibSupport loadRaylib(const(char)* libName) {
    }
 
    static if (raylibSupport >= RaylibSupport.raylib260) {
+      pragma(msg, "260");
+
+      lib.bindSymbol(cast(void**)&IsAudioStreamProcessed, "IsAudioStreamProcessed");
       lib.bindSymbol(cast(void**)&GetWindowPosition, "GetWindowPosition");
       lib.bindSymbol(cast(void**)&ColorFromNormalized, "ColorFromNormalized");
       lib.bindSymbol(cast(void**)&GetWorldToScreenEx, "GetWorldToScreenEx");
@@ -573,14 +572,34 @@ RaylibSupport loadRaylib(const(char)* libName) {
       }
    }
 
-   static if (raylibSupport >= RaylibSupport.raylib260) {
+   static if (raylibSupport >= RaylibSupport.raylib300) {
+      pragma(msg, "300");
       lib.bindSymbol(cast(void**)&IsWindowFocused, "IsWindowFocused");
       lib.bindSymbol(cast(void**)&IsWindowFullscreen, "IsWindowFullscreen");
       lib.bindSymbol(cast(void**)&GetWindowScaleDPI, "GetWindowScaleDPI");
+      lib.bindSymbol(cast(void**)&ImageClearBackground, "ImageClearBackground");
+      lib.bindSymbol(cast(void**)&ImageDrawPixel, "ImageDrawPixel");
+      lib.bindSymbol(cast(void**)&ImageClearBackground, "ImageClearBackground");
+      lib.bindSymbol(cast(void**)&ImageDrawPixel, "ImageDrawPixel");
+      lib.bindSymbol(cast(void**)&ImageDrawPixelV, "ImageDrawPixelV");
+      lib.bindSymbol(cast(void**)&ImageDrawLine, "ImageDrawLine");
+      lib.bindSymbol(cast(void**)&ImageDrawLineV, "ImageDrawLineV");
+      lib.bindSymbol(cast(void**)&ImageDrawCircle, "ImageDrawCircle");
+      lib.bindSymbol(cast(void**)&ImageDrawCircleV, "ImageDrawCircleV");
+      lib.bindSymbol(cast(void**)&ImageDrawRectangleV, "ImageDrawRectangleV");
+      lib.bindSymbol(cast(void**)&ImageDrawRectangleRec, "ImageDrawRectangleRec");
+
+      lib.bindSymbol(cast(void**)&GenTextureCubemap, "GenTextureCubemap");
+      lib.bindSymbol(cast(void**)&GenTextureIrradiance, "GenTextureIrradiance");
+      lib.bindSymbol(cast(void**)&GenTexturePrefilter, "GenTexturePrefilter");
+      lib.bindSymbol(cast(void**)&GenTextureBRDF, "GenTextureBRDF");
+      lib.bindSymbol(cast(void**)&SetAudioStreamBufferSizeDefault, "SetAudioStreamBufferSizeDefault");
+      lib.bindSymbol(cast(void**)&LoadFileText, "LoadFileText");
+
       if (errorCount() != errCount) {
          loadedVersion = RaylibSupport.badLibrary;
       } else {
-         loadedVersion = RaylibSupport.raylib260;
+         loadedVersion = RaylibSupport.raylib300;
       }
    }
 

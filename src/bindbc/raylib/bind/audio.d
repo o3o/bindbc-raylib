@@ -31,10 +31,6 @@ version (BindRaylib_Static) {
        */
       alias pLoadWave = Wave function(const(char)* fileName);
       /**
-       * Load wave data from raw array data
-       */
-      alias pLoadWaveEx = Wave function(void* data, int sampleCount, int sampleRate, int sampleSize, int channels);
-      /**
        * Load sound from file
        */
       alias pLoadSound = Sound function(const(char)* fileName);
@@ -104,6 +100,11 @@ version (BindRaylib_Static) {
        * Set pitch for a sound (1.0 is base level)
        */
       alias pSetSoundPitch = void function(Sound sound, float pitch);
+
+      /**
+      * Default size for new audio streams
+      */
+      alias pSetAudioStreamBufferSizeDefault = void function(int size);
       /**
        * Convert wave data to desired format
        */
@@ -191,7 +192,7 @@ version (BindRaylib_Static) {
       /**
        * Check if any audio stream buffers requires refill
        */
-      alias pIsAudioBufferProcessed = bool function(AudioStream stream);
+      alias pIsAudioStreamProcessed = bool function(AudioStream stream);
       /**
        * Play audio stream
        */
@@ -227,7 +228,6 @@ version (BindRaylib_Static) {
       pIsAudioDeviceReady IsAudioDeviceReady;
       pSetMasterVolume SetMasterVolume;
       pLoadWave LoadWave;
-      pLoadWaveEx LoadWaveEx;
       pLoadSound LoadSound;
       pLoadSoundFromWave LoadSoundFromWave;
       pUpdateSound UpdateSound;
@@ -245,6 +245,7 @@ version (BindRaylib_Static) {
       pIsSoundPlaying IsSoundPlaying;
       pSetSoundVolume SetSoundVolume;
       pSetSoundPitch SetSoundPitch;
+      pSetAudioStreamBufferSizeDefault SetAudioStreamBufferSizeDefault;
       pWaveFormat WaveFormat;
       pWaveCopy WaveCopy;
       pWaveCrop WaveCrop;
@@ -265,7 +266,7 @@ version (BindRaylib_Static) {
       pInitAudioStream InitAudioStream;
       pUpdateAudioStream UpdateAudioStream;
       pCloseAudioStream CloseAudioStream;
-      pIsAudioBufferProcessed IsAudioBufferProcessed;
+      pIsAudioStreamProcessed IsAudioStreamProcessed;
       pPlayAudioStream PlayAudioStream;
       pPauseAudioStream PauseAudioStream;
       pResumeAudioStream ResumeAudioStream;
