@@ -70,7 +70,7 @@ __dub.json__
 
 __dub.sdl__
 ```
-versions "RAYLIB260" "RAYGUI"
+versions "RAYLIB_260" "RAYGUI"
 ```
 
 ## Enable support for raylib versions
@@ -79,18 +79,18 @@ Raylib versions can be configured by adding the appropriate version to a `versio
 | raylib Version | raylib commit                              | Version ID |
 | ---            | ---                                        | ---        |
 | 2.5.0          |                                            | Default    |
-| 2.6.0          | `117696a8936007592f7fe7c0b7b227a805e3b74a` | RAYLIB260  |
-| 3.0.0          | `72443f8f25b1f8ded3b05da17857b7eeb1556b35` | RAYLIB300  |
+| 2.6.0          | `117696a8936007592f7fe7c0b7b227a805e3b74a` | RAYLIB_260  |
+| 3.0.0          | `72443f8f25b1f8ded3b05da17857b7eeb1556b35` | RAYLIB_300  |
 
 
 __dub.json__
 ```
-"versions": [ "RAYLIB260" ],
+"versions": [ "RAYLIB_260" ],
 ```
 
 __dub.sdl__
 ```
-versions "RAYLIB260"
+versions "RAYLIB_260"
 ```
 
 ## Examples

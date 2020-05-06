@@ -11,6 +11,8 @@ void main(string[] args) {
       writeln("ERROR: ", retVal);
    } else {
       writeln("VERIOSN: ", retVal);
+      writeln("loaded : ", loadedRaylibVersion);
+
       // Initialization
       enum SCREEN_WIDTH = 800;
       enum SCREEN_HEIGHT = 450;
