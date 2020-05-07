@@ -1,0 +1,16 @@
+name "textures"
+description "Texture"
+authors "Orfeo Da Vià"
+copyright "Copyright © 2020, o3o"
+dependency "bindbc-raylib" path="../.."
+/*libs "raylib"*/
+targetType "executable"
+
+// dub -cpart
+configuration "part" {
+   targetName "textures_particles_blending"
+   sourceFiles "textures_particles_blending.d"
+   libs "x11"
+   libs "raylib"
+   versions "RAYLIB_300"
+}

@@ -85,7 +85,13 @@ struct Matrix {
 }
 
 struct Rectangle {
+   /**
+    * Top right angle x coordinate
+    */
    float x;
+   /**
+    * Top right angle y coordinate
+    */
    float y;
    float width;
    float height;

@@ -45,6 +45,13 @@ configuration "multi" {
    libs "raylib"
    versions "RAYLIB_300"
 }
+configuration "camera2" {
+   targetName "core_2d_camera"
+   sourceFiles "core_2d_camera.d"
+   libs "x11"
+   libs "raylib"
+   versions "RAYLIB_300"
+}
 
 configuration "arm" {
    targetName "basic-arm"
