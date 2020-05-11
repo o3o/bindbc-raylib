@@ -17,3 +17,4 @@ examples/core/basic_window
 examples/core/input_mouse
 examples/gui/cts
 bin/
+examples/core/core_input_gestures

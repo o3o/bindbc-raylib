@@ -51,7 +51,16 @@ configuration "camera2" {
    libs "x11"
    libs "raylib"
    versions "RAYLIB_300"
+   }
+
+configuration "ig" {
+   targetName "core_input_gestures"
+   sourceFiles "core_input_gestures.d"
+   libs "x11"
+   libs "raylib"
+   versions "RAYLIB_300"
 }
+
 
 configuration "arm" {
    targetName "basic-arm"

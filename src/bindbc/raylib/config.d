@@ -10,11 +10,11 @@ enum RaylibSupport {
 
 version (RAYLIB_300) {
    enum raylibSupport = RaylibSupport.raylib300;
-   pragma(msg, "300");
+   pragma(msg, "raylib version 300");
 } else version (RAYLIB_260) {
    enum raylibSupport = RaylibSupport.raylib260;
-   pragma(msg, "260");
+   pragma(msg, "raylib version 260");
 } else {
    enum raylibSupport = RaylibSupport.raylib250;
-   pragma(msg, "250");
+   pragma(msg, "raylib version 250");
 }

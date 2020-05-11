@@ -555,8 +555,6 @@ RaylibSupport loadRaylib(const(char)* libName) {
    }
 
    static if (raylibSupport >= RaylibSupport.raylib260) {
-      pragma(msg, "260");
-
       lib.bindSymbol(cast(void**)&IsAudioStreamProcessed, "IsAudioStreamProcessed");
       lib.bindSymbol(cast(void**)&GetWindowPosition, "GetWindowPosition");
       lib.bindSymbol(cast(void**)&ColorFromNormalized, "ColorFromNormalized");
@@ -573,7 +571,6 @@ RaylibSupport loadRaylib(const(char)* libName) {
    }
 
    static if (raylibSupport >= RaylibSupport.raylib300) {
-      pragma(msg, "300");
       lib.bindSymbol(cast(void**)&IsWindowFocused, "IsWindowFocused");
       lib.bindSymbol(cast(void**)&IsWindowFullscreen, "IsWindowFullscreen");
       lib.bindSymbol(cast(void**)&GetWindowScaleDPI, "GetWindowScaleDPI");

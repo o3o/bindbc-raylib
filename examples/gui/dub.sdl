@@ -4,7 +4,7 @@ authors "o3o"
 copyright "Copyright © 2020, o3o"
 dependency "bindbc-raylib" path="../.."
 targetType "executable"
-versions "RAYLIB260" "RAYGUI"
+versions "RAYLIB_300" "RAYGUI"
 
 // dub -ccts
 configuration "cts" {

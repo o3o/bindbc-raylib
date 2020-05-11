@@ -1,10 +1,26 @@
 # bindbc-raylib
 This project provides both static (WIP) and dynamic bindings to the [raylib](https://www.raylib.com/).
 
+
 ## Compile raylib
 1. Clone `raylib`:
 ```
 $ git clone https://github.com/raysan5/raylib.git
+```
+
+2. (Optional), create a new branch `bindbc`
+This binding is based on commit  `72443f8f25b1f8ded3b05da17857b7eeb1556b35` (May 2 11:56:24 2020 +0200)
+
+```
+$ git checkout -b bindbc 72443f8f
+```
+
+The tagged 3.0.0 relase is:
+```
+$ git log 3.0.0
+commit 7ef114d1da2c34a70bba5442497103441647d8f3 (tag: 3.0.0)
+Author: Ray <raysan5@gmail.com>
+Date:   Wed Apr 1 11:07:01 2020 +0200
 ```
 
 2. Compile shared library (see [raylib wiki](https://github.com/raysan5/raylib/wiki))
@@ -14,7 +30,7 @@ $ make RAYLIB_LIBTYPE=SHARED
 $ sudo make install RAYLIB_LIBTYPE=SHARED
 ```
 
-### Compile with [raygui](https://github.com/raysan5/raygui)
+## Compile with [raygui](https://github.com/raysan5/raygui)
 1. Clone `raygui`:
 ```
 $ git clone https://github.com/raysan5/raygui.git
