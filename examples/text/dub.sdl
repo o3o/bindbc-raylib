@@ -1,0 +1,17 @@
+name "text"
+description "Text example"
+authors "Orfeo Da Vià"
+copyright "Copyright © 2020, o3o"
+dependency "bindbc-raylib" path="../.."
+/*libs "raylib"*/
+targetType "executable"
+
+// dub -crb
+configuration "rb" {
+   targetName "text_rectangle_bounds"
+   sourceFiles "text_rectangle_bounds.d"
+   libs "x11"
+   libs "raylib"
+   versions "RAYLIB_300"
+}
+
