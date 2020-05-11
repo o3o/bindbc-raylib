@@ -14,4 +14,17 @@ configuration "rb" {
    libs "raylib"
    versions "RAYLIB_300"
 }
-
+configuration "ib" {
+   targetName "text_input_box"
+   sourceFiles "text_input_box.d"
+   libs "x11"
+   libs "raylib"
+   versions "RAYLIB_300"
+}
+configuration "ft" {
+   targetName "text_format_text"
+   sourceFiles "text_format_text.d"
+   libs "x11"
+   libs "raylib"
+   versions "RAYLIB_300"
+}

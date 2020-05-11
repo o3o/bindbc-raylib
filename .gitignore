@@ -18,3 +18,5 @@ examples/core/input_mouse
 examples/gui/cts
 bin/
 examples/core/core_input_gestures
+examples/text/text_format_text
+examples/text/text_input_box
