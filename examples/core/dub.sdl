@@ -52,7 +52,21 @@ configuration "camera2" {
    libs "raylib"
    versions "RAYLIB_300"
    }
+configuration "c22" {
+   targetName "core_2d_camera2"
+   sourceFiles "core_2d_camera2.d"
+   libs "x11"
+   libs "raylib"
+   versions "RAYLIB_300"
+   }
 
+configuration "c23" {
+   targetName "core_2d_camera3"
+   sourceFiles "core_2d_camera3.d"
+   libs "x11"
+   libs "raylib"
+   versions "RAYLIB_300"
+   }
 configuration "ig" {
    targetName "core_input_gestures"
    sourceFiles "core_input_gestures.d"
