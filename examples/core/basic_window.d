@@ -4,13 +4,13 @@ import loader = bindbc.loader.sharedlib;
 
 void main(string[] args) {
    RaylibSupport retVal = loadRaylib();
-   if (retVal == RaylibSupport.badLibrary) {
+   if (retVal != raylibSupport) {
       foreach(info; loader.errors) {
          writefln("e: %s, m:%s", info.error, info.message);
       }
       writeln("ERROR: ", retVal);
    } else {
-      writeln("VERIOSN: ", retVal);
+      writeln("VERSION: ", retVal);
       writeln("loaded : ", loadedRaylibVersion);
 
       // Initialization

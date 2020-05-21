@@ -7,7 +7,7 @@ import std.string : toStringz;
 
 void main(string[] args) {
    RaylibSupport retVal = loadRaylib();
-   if (retVal == RaylibSupport.badLibrary) {
+   if (retVal != raylibSupport) {
       foreach (info; loader.errors) {
          writefln("e: %s, m:%s", info.error, info.message);
       }

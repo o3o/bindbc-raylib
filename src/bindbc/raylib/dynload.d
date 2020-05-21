@@ -55,12 +55,9 @@ RaylibSupport loadRaylib() {
 }
 
 RaylibSupport loadRaylib(const(char)* libName) {
-   // If the library isn't yet loaded, load it now.
+   lib = load(libName);
    if (lib == invalidHandle) {
-      lib = load(libName);
-      if (lib == invalidHandle) {
-         return RaylibSupport.noLibrary;
-      }
+      return RaylibSupport.noLibrary;
    }
 
    auto errCount = errorCount();
@@ -549,7 +546,7 @@ RaylibSupport loadRaylib(const(char)* libName) {
    }
 
    if (errorCount() != errCount) {
-      loadedVersion = RaylibSupport.badLibrary;
+      return RaylibSupport.badLibrary;
    } else {
       loadedVersion = RaylibSupport.raylib250;
    }
@@ -564,7 +561,7 @@ RaylibSupport loadRaylib(const(char)* libName) {
       lib.bindSymbol(cast(void**)&GetCameraMatrix2D, "GetCameraMatrix2D");
 
       if (errorCount() != errCount) {
-         loadedVersion = RaylibSupport.badLibrary;
+         return RaylibSupport.badLibrary;
       } else {
          loadedVersion = RaylibSupport.raylib260;
       }
@@ -594,7 +591,7 @@ RaylibSupport loadRaylib(const(char)* libName) {
       lib.bindSymbol(cast(void**)&LoadFileText, "LoadFileText");
 
       if (errorCount() != errCount) {
-         loadedVersion = RaylibSupport.badLibrary;
+         return RaylibSupport.badLibrary;
       } else {
          loadedVersion = RaylibSupport.raylib300;
       }
