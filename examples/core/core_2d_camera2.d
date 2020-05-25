@@ -8,7 +8,7 @@ void main(string[] args) {
    import std.conv : to;
 
    RaylibSupport retVal = loadRaylib();
-   if (retVal == RaylibSupport.badLibrary) {
+   if (retVal != raylibSupport) {
       foreach (info; loader.errors) {
          writefln("e: %s, m:%s", info.error, info.message);
       }
@@ -44,12 +44,20 @@ void main(string[] args) {
 
       while (!WindowShouldClose()) { // Detect window close button or ESC key
          if (IsKeyPressed(KeyboardKey.KEY_UP)) {
-            camera.target = Vector2(CAM_X, camera.target.y  + BLOCK_HEIGHT);
+            camera.target = Vector2(CAM_X, camera.target.y  + BLOCK_HEIGHT /2);
             tracef("UP %s", camera);
          } else if (IsKeyPressed(KeyboardKey.KEY_DOWN)) {
-            camera.target = Vector2(CAM_X, camera.target.y  - BLOCK_HEIGHT);
+            camera.target = Vector2(CAM_X, camera.target.y  - BLOCK_HEIGHT/2);
             tracef("DOWN %s", camera);
          }
+         if (IsKeyPressed(KeyboardKey.KEY_LEFT)) {
+            camera.offset = Vector2(CAM_X, camera.target.y  + BLOCK_HEIGHT);
+            tracef("OFF LEFT %s", camera);
+         } else if (IsKeyPressed(KeyboardKey.KEY_RIGHT)) {
+            camera.offset = Vector2(CAM_X, camera.target.y  - BLOCK_HEIGHT);
+            tracef("RIG %s", camera);
+         }
+
 
          // Camera target follows player
 
