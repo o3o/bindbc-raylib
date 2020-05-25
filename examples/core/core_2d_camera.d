@@ -15,7 +15,7 @@ void main(string[] args) {
    } else {
 
       // Initialization
-      enum MAX_BUILDINGS = 100;
+      enum MAX_BUILDINGS = 6;
       enum SCREEN_WIDTH = 800;
       enum SCREEN_HEIGHT = 450;
       InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "raylib [core] example - 2d window");

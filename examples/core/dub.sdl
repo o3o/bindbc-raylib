@@ -75,9 +75,18 @@ configuration "ig" {
    versions "RAYLIB_300"
 }
 
+configuration "ig2" {
+   targetName "core_input_gestures2"
+   sourceFiles "core_input_gestures2.d"
+   libs "x11"
+   libs "raylib"
+   versions "RAYLIB_300"
+}
 
+// dubbio -l -c=arm
 configuration "arm" {
    targetName "basic-arm"
-   sourceFiles "basic_window.d" "./libraylib.a"
+   sourceFiles "basic_window.d"
+   libs "raylib"
    dflags "-conf=ldc_arm.conf" platform="ldc"
 }
