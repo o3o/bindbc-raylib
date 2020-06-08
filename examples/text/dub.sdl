@@ -27,4 +27,12 @@ configuration "ft" {
    libs "x11"
    libs "raylib"
    versions "RAYLIB_300"
+   }
+
+configuration "fl" {
+   targetName "text_font_loading"
+   sourceFiles "text_font_loading.d"
+   libs "x11"
+   libs "raylib"
+   versions "RAYLIB_300"
 }
