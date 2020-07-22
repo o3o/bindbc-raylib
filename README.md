@@ -5,12 +5,13 @@ This project provides both static (WIP) and dynamic bindings to the [raylib](htt
 
 ## Compile raylib source code
 You can only compile raylib or also include support for raygui.
-
+In the following examples we use `~/cc/raylib` for raylib source code, `~/cc/raygui` for raygui source code and `~/d/bindbc-raylib` for bindbc-raylib source coe.
 
 ### Compile only raylib
 
 1. Clone `raylib`:
 ```
+$ cd ~/cc
 $ git clone https://github.com/raysan5/raylib.git
 ```
 
@@ -22,14 +23,14 @@ $ git checkout -b bindbc 72443f8f
 $ git describe --tags
 3.0.0-70-g72443f8f
 ```
-The tagged 3.0.0 release is older (April 1)
+The tagged 3.0.0 release is older (April 1):
 ```
 $ git log 3.0.0
 commit 7ef114d1da2c34a70bba5442497103441647d8f3 (tag: 3.0.0)
 Author: Ray <raysan5@gmail.com>
 Date:   Wed Apr 1 11:07:01 2020 +0200
 ```
-and is somewhat different from the version used here.
+and is somewhat different from the version used here.__Do not use__
 
 2. Compile shared library (see [raylib wiki](https://github.com/raysan5/raylib/wiki))
 ```
@@ -38,11 +39,12 @@ $ make RAYLIB_LIBTYPE=SHARED
 $ sudo make install RAYLIB_LIBTYPE=SHARED
 ```
 
-## Compile with [raygui](https://github.com/raysan5/raygui)
+### Compile with [raygui](https://github.com/raysan5/raygui)
 Follow the previous steps an then:
 
 1. Clone `raygui`:
 ```
+$ cd ~/cc
 $ git clone https://github.com/raysan5/raygui.git
 ```
 
@@ -61,7 +63,11 @@ $ cp src/*.h ../raylib/src
 +       echo '#define RAYGUI_SUPPORT_ICONS' >> raygui.c
         echo '#include "$(RAYLIB_MODULE_RAYGUI_PATH)/raygui.h"' >> raygui.c
 ```
-Or use `tool/Makefile_with_raygui_support`
+Or use `tools/Makefile_with_raygui_support`:
+```
+$ cd ~/cc
+$ cp ~/d/bindbc-raylib/tools/Makefile_with_raygui_support src/Makefile
+```
 
 4. Compile with raygui support (`RAYLIB_MODULE_RAYGUI=TRUE`)
 ```
@@ -102,12 +108,11 @@ __dub.json__
 
 __dub.sdl__
 ```
-versions "RAYLIB_260" "RAYGUI"
+versions "RAYGUI"
 ```
 
 ### Enable support for raylib versions
-Raylib versions can be configured by adding the appropriate version to a `versions` directive in your dub file
-
+Raylib versions can be configured by adding the appropriate version to a `versions` directive in your dub file.
 bindbc-raylib defines a D version identifier for each raylib version.
 The following table lists each identifier and the raylib versions they enable:
 
