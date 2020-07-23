@@ -1,11 +1,11 @@
 # bindbc-raylib
-This project provides both static (WIP) and dynamic bindings to the [raylib](https://www.raylib.com/)a simple and easy-to-use library to enjoy videogames programming and [raygui](https://github.com/raysan5/raygui) a simple and easy-to-use immediate-mode-gui library.
+This project provides both static (WIP) and dynamic bindings to the [raylib](https://www.raylib.com/) _a simple and easy-to-use library to enjoy videogames programming_ and [raygui](https://github.com/raysan5/raygui) _a simple and easy-to-use immediate-mode-gui library_.
 
 
 
 ## Compile raylib source code
 You can only compile raylib or also include support for raygui.
-In the following examples we use `~/cc/raylib` for raylib source code, `~/cc/raygui` for raygui source code and `~/d/bindbc-raylib` for bindbc-raylib source coe.
+In the following examples we use `~/cc/raylib` for raylib source code, `~/cc/raygui` for raygui source code and `~/d/bindbc-raylib` for bindbc-raylib source code.
 
 ### Compile only raylib
 
@@ -65,7 +65,7 @@ $ cp src/*.h ../raylib/src
 ```
 Or use `tools/Makefile_with_raygui_support`:
 ```
-$ cd ~/cc
+$ cd ~/cc/raylib
 $ cp ~/d/bindbc-raylib/tools/Makefile_with_raygui_support src/Makefile
 ```
 
@@ -122,7 +122,7 @@ The following table lists each identifier and the raylib versions they enable:
 | 2.6.0              | `117696a8`    | RAYLIB_260 |
 | 3.0.0-70-g72443f8f | `72443f8f`    | RAYLIB_300 |
 
-The following examples are configured to use raylib version 2.6.0
+For examples, in order to use raylib version 2.6.0:
 
 __dub.json__
 ```
