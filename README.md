@@ -112,7 +112,13 @@ versions "RAYGUI"
 ```
 
 ### Enable support for raylib versions
-Raylib versions can be configured by adding the appropriate version to a `versions` directive in your dub file.
+Not all raylib tags are annotated. To see the correct version of raylib source:
+```
+$ cd raylib
+$ git describe --tag
+```
+
+So, raylib versions can be configured by adding appropriate `versions` directive in your dub file.
 bindbc-raylib defines a D version identifier for each raylib version.
 The following table lists each identifier and the raylib versions they enable:
 
@@ -120,10 +126,8 @@ The following table lists each identifier and the raylib versions they enable:
 | ---                | ---           | ---        |
 | 2.5.0              |               | Default    |
 | 2.6.0              | `117696a8`    | RAYLIB_260 |
-| 3.0.0              | `7ef114d1`    | _to do_    |
-| 3.0.0-70-g72443f8f | `72443f8f`    | RAYLIB_300 |
-
-(Not all tags are annotated)
+| 3.0.0              | `7ef114d1`    | RAYLIB_300 |
+| 3.0.0-70-g72443f8f | `72443f8f`    | RAYLIB_301 |
 
 For examples, in order to use raylib version 2.6.0:
 
@@ -139,7 +143,7 @@ versions "RAYLIB_260"
 
 ### Loading raylib
 The `loadRaylib` function is used to load all supported raylib functions.
-The return value of `loadRaylib`  can be used to determine which version of raylib actually loaded.
+The return value of `loadRaylib` can be used to determine which version of raylib actually loaded.
 ```d
 import bindbc.raylib;
 import loader = bindbc.loader.sharedlib;

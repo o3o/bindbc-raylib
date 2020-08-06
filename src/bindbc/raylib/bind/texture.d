@@ -208,15 +208,21 @@ version (BindRaylib_Static) {
        * Draw rectangle lines within an image
        */
       alias pImageDrawRectangleLines = void function(Image* dst, Rectangle rec, int thick, Color color);
-      /**
-       * Draw text (default font) within an image (destination)
-       */
-      alias pImageDrawText = void function(Image* dst, Vector2 position, const(char)* text, int fontSize, Color color);
-      /**
-       * Draw text (custom sprite font) within an image (destination)
-       */
-      alias pImageDrawTextEx = void function(Image* dst, Vector2 position, Font font, const(char)* text, float fontSize,
-            float spacing, Color color);
+
+      version (RAYLIB_301) {
+         alias pImageDrawText = void function(Image *dst, const(char)* text, int posX, int posY, int fontSize, Color color);
+         alias pImageDrawTextEx = void function(Image *dst, Font font, const(char)* text, Vector2 position, float fontSize, float spacing, Color tint);
+      } else version (RAYLIB_300) {
+         /**
+          * Draw text (default font) within an image (destination)
+          */
+         alias pImageDrawText = void function(Image* dst, Vector2 position, const(char)* text, int fontSize, Color color);
+         /**
+          * Draw text (custom sprite font) within an image (destination)
+          */
+         alias pImageDrawTextEx = void function(Image* dst, Vector2 position, Font font, const(char)* text, float fontSize,
+               float spacing, Color color);
+      }
       /**
        * Flip image vertically
        */

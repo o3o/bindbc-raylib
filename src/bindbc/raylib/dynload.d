@@ -232,7 +232,6 @@ RaylibSupport loadRaylib(const(char)* libName) {
    //
    lib.bindSymbol(cast(void**)&LoadImage, "LoadImage");
    lib.bindSymbol(cast(void**)&LoadImageEx, "LoadImageEx");
-   // FIX not in rayliob: lib.bindSymbol(cast(void**)&LoadImagePro, "LoadImagePro");
    lib.bindSymbol(cast(void**)&LoadImageRaw, "LoadImageRaw");
    lib.bindSymbol(cast(void**)&ExportImage, "ExportImage");
    lib.bindSymbol(cast(void**)&ExportImageAsCode, "ExportImageAsCode");
@@ -566,11 +565,12 @@ RaylibSupport loadRaylib(const(char)* libName) {
          loadedVersion = RaylibSupport.raylib260;
       }
    }
-
+   static if (raylibSupport == RaylibSupport.raylib300) {
+      // only in 3.0.0
+      lib.bindSymbol(cast(void**)&LoadImagePro, "LoadImagePro");
+   }
    static if (raylibSupport >= RaylibSupport.raylib300) {
-      lib.bindSymbol(cast(void**)&IsWindowFocused, "IsWindowFocused");
       lib.bindSymbol(cast(void**)&IsWindowFullscreen, "IsWindowFullscreen");
-      lib.bindSymbol(cast(void**)&GetWindowScaleDPI, "GetWindowScaleDPI");
       lib.bindSymbol(cast(void**)&ImageClearBackground, "ImageClearBackground");
       lib.bindSymbol(cast(void**)&ImageDrawPixel, "ImageDrawPixel");
       lib.bindSymbol(cast(void**)&ImageClearBackground, "ImageClearBackground");
@@ -595,6 +595,10 @@ RaylibSupport loadRaylib(const(char)* libName) {
       } else {
          loadedVersion = RaylibSupport.raylib300;
       }
+   }
+   static if (raylibSupport >= RaylibSupport.raylib301) {
+      lib.bindSymbol(cast(void**)&IsWindowFocused, "IsWindowFocused");
+      lib.bindSymbol(cast(void**)&GetWindowScaleDPI, "GetWindowScaleDPI");
    }
 
    return loadedVersion;

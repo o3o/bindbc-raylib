@@ -5,10 +5,14 @@ enum RaylibSupport {
    badLibrary,
    raylib250,
    raylib260,
-   raylib300
+   raylib300,
+   raylib301 // 3.0.0-70-g72443f8f
 }
 
-version (RAYLIB_300) {
+version (RAYLIB_301) {
+   enum raylibSupport = RaylibSupport.raylib301;
+   pragma(msg, "raylib version 301 (3.0.0-70)");
+} else version (RAYLIB_300) {
    enum raylibSupport = RaylibSupport.raylib300;
    pragma(msg, "raylib version 300");
 } else version (RAYLIB_260) {
