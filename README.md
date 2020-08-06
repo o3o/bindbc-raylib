@@ -120,7 +120,10 @@ The following table lists each identifier and the raylib versions they enable:
 | ---                | ---           | ---        |
 | 2.5.0              |               | Default    |
 | 2.6.0              | `117696a8`    | RAYLIB_260 |
+| 3.0.0              | `7ef114d1`    | _to do_    |
 | 3.0.0-70-g72443f8f | `72443f8f`    | RAYLIB_300 |
+
+(Not all tags are annotated)
 
 For examples, in order to use raylib version 2.6.0:
 
