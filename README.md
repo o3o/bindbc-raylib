@@ -119,7 +119,8 @@ $ git describe --tag
 ```
 
 So, raylib versions can be configured by adding appropriate `versions` directive in your dub file.
-bindbc-raylib defines a D version identifier for each raylib version.
+`bindbc-raylib` defines a D version identifier for each raylib version.
+
 The following table lists each identifier and the raylib versions they enable:
 
 | raylib version     | raylib commit | Version ID |
