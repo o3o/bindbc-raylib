@@ -9,7 +9,14 @@ enum RaylibSupport {
    raylib301 // 3.0.0-70-g72443f8f
 }
 
-version (RAYLIB_301) {
+version(BindBC_Static) version = BindRaylib_Static;
+version(BindRaylib_Static) enum staticBinding = true;
+else enum staticBinding = false;
+
+version (RAYLIB_300_70) {
+   enum raylibSupport = RaylibSupport.raylib301;
+   pragma(msg, "raylib version 300_70 (3.0.0-70)");
+} else version (RAYLIB_301) {
    enum raylibSupport = RaylibSupport.raylib301;
    pragma(msg, "raylib version 301 (3.0.0-70)");
 } else version (RAYLIB_300) {

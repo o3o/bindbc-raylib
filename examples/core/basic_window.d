@@ -4,6 +4,8 @@ import loader = bindbc.loader.sharedlib;
 
 void main(string[] args) {
    RaylibSupport retVal = loadRaylib();
+
+   writeln("retVal: ", retVal);
    if (retVal != raylibSupport) {
       foreach(info; loader.errors) {
          writefln("e: %s, m:%s", info.error, info.message);

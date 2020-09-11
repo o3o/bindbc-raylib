@@ -599,6 +599,11 @@ RaylibSupport loadRaylib(const(char)* libName) {
    static if (raylibSupport >= RaylibSupport.raylib301) {
       lib.bindSymbol(cast(void**)&IsWindowFocused, "IsWindowFocused");
       lib.bindSymbol(cast(void**)&GetWindowScaleDPI, "GetWindowScaleDPI");
+      if (errorCount() != errCount) {
+         return RaylibSupport.badLibrary;
+      } else {
+         loadedVersion = RaylibSupport.raylib301;
+      }
    }
 
    return loadedVersion;

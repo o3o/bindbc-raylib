@@ -2,7 +2,6 @@
 This project provides both static (WIP) and dynamic bindings to the [raylib](https://www.raylib.com/) _a simple and easy-to-use library to enjoy videogames programming_ and [raygui](https://github.com/raysan5/raygui) _a simple and easy-to-use immediate-mode-gui library_.
 
 
-
 ## Compile raylib source code
 You can only compile raylib or also include support for raygui.
 In the following examples we use `~/cc/raylib` for raylib source code, `~/cc/raygui` for raygui source code and `~/d/bindbc-raylib` for bindbc-raylib source code.

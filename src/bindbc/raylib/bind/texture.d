@@ -1,5 +1,6 @@
 module bindbc.raylib.bind.texture;
 
+import bindbc.raylib.config;
 import bindbc.raylib.types;
 
 version (BindRaylib_Static) {
@@ -15,10 +16,6 @@ version (BindRaylib_Static) {
        * Load image from Color array data (RGBA - 32bit)
        */
       alias pLoadImageEx = Image function(Color* pixels, int width, int height);
-      /**
-       * Load image from raw data with parameters
-       */
-      alias pLoadImagePro = Image function(void* data, int width, int height, int format);
       /**
        * Load image from RAW file data
        */
@@ -209,20 +206,7 @@ version (BindRaylib_Static) {
        */
       alias pImageDrawRectangleLines = void function(Image* dst, Rectangle rec, int thick, Color color);
 
-      version (RAYLIB_301) {
-         alias pImageDrawText = void function(Image *dst, const(char)* text, int posX, int posY, int fontSize, Color color);
-         alias pImageDrawTextEx = void function(Image *dst, Font font, const(char)* text, Vector2 position, float fontSize, float spacing, Color tint);
-      } else version (RAYLIB_300) {
-         /**
-          * Draw text (default font) within an image (destination)
-          */
-         alias pImageDrawText = void function(Image* dst, Vector2 position, const(char)* text, int fontSize, Color color);
-         /**
-          * Draw text (custom sprite font) within an image (destination)
-          */
-         alias pImageDrawTextEx = void function(Image* dst, Vector2 position, Font font, const(char)* text, float fontSize,
-               float spacing, Color color);
-      }
+
       /**
        * Flip image vertically
        */
@@ -348,7 +332,6 @@ version (BindRaylib_Static) {
    __gshared {
       pLoadImage LoadImage;
       pLoadImageEx LoadImageEx;
-      pLoadImagePro LoadImagePro;
       pLoadImageRaw LoadImageRaw;
       pExportImage ExportImage;
       pExportImageAsCode ExportImageAsCode;
@@ -397,8 +380,6 @@ version (BindRaylib_Static) {
       pImageDraw ImageDraw;
       pImageDrawRectangle ImageDrawRectangle;
       pImageDrawRectangleLines ImageDrawRectangleLines;
-      pImageDrawText ImageDrawText;
-      pImageDrawTextEx ImageDrawTextEx;
       pImageFlipVertical ImageFlipVertical;
       pImageFlipHorizontal ImageFlipHorizontal;
       pImageRotateCW ImageRotateCW;
@@ -429,5 +410,38 @@ version (BindRaylib_Static) {
       pDrawTextureQuad DrawTextureQuad;
       pDrawTexturePro DrawTexturePro;
       pDrawTextureNPatch DrawTextureNPatch;
+   }
+
+   static if (raylibSupport == RaylibSupport.raylib301) {
+      extern (C) @nogc nothrow {
+         alias pImageDrawText = void function(Image *dst, const(char)* text, int posX, int posY, int fontSize, Color color);
+         alias pImageDrawTextEx = void function(Image *dst, Font font, const(char)* text, Vector2 position, float fontSize, float spacing, Color tint);
+      }
+      __gshared {
+         pImageDrawText ImageDrawText;
+         pImageDrawTextEx ImageDrawTextEx;
+      }
+
+   } else static if (raylibSupport <= RaylibSupport.raylib300) {
+      extern (C) @nogc nothrow {
+         /**
+          * Load image from raw data with parameters
+          */
+         alias pLoadImagePro = Image function(void* data, int width, int height, int format);
+         /**
+          * Draw text (default font) within an image (destination)
+          */
+         alias pImageDrawText = void function(Image* dst, Vector2 position, const(char)* text, int fontSize, Color color);
+         /**
+          * Draw text (custom sprite font) within an image (destination)
+          */
+         alias pImageDrawTextEx = void function(Image* dst, Vector2 position, Font font, const(char)* text, float fontSize,
+               float spacing, Color color);
+      }
+      __gshared {
+         pLoadImagePro LoadImagePro;
+         pImageDrawText ImageDrawText;
+         pImageDrawTextEx ImageDrawTextEx;
+      }
    }
 }

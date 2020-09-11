@@ -3,23 +3,19 @@ description "Core - Basic window"
 authors "o3o"
 copyright "Copyright © 2020, o3o"
 dependency "bindbc-raylib" path="../.."
-/*libs "raylib"*/
 targetType "executable"
 
 // dub -cbasic
 configuration "basic" {
    targetName "basic_window"
    sourceFiles "basic_window.d"
-   libs "x11"
-   libs "raylib"
-   versions "RAYLIB_300"
+   versions "RAYLIB_301"
 }
 
 configuration "basic26" {
    targetName "basic_window"
    sourceFiles "basic_window.d"
    libs "x11"
-   libs "raylib"
    versions "RAYLIB_260"
 }
 
@@ -27,14 +23,12 @@ configuration "basic25" {
    targetName "basic_window"
    sourceFiles "basic_window.d"
    libs "x11"
-   libs "raylib"
 }
 
 configuration "mouse" {
    targetName "input_mouse"
    sourceFiles "input_mouse.d"
    libs "x11"
-   libs "raylib"
    versions "RAYLIB_300"
 }
 
@@ -42,21 +36,18 @@ configuration "multi" {
    targetName "input_multitouch"
    sourceFiles "input_multitouch.d"
    libs "x11"
-   libs "raylib"
    versions "RAYLIB_300"
 }
 configuration "camera2" {
    targetName "core_2d_camera"
    sourceFiles "core_2d_camera.d"
    libs "x11"
-   libs "raylib"
    versions "RAYLIB_300"
    }
 configuration "c22" {
    targetName "core_2d_camera2"
    sourceFiles "core_2d_camera2.d"
    libs "x11"
-   libs "raylib"
    versions "RAYLIB_300"
    }
 
@@ -64,14 +55,12 @@ configuration "c23" {
    targetName "core_2d_camera3"
    sourceFiles "core_2d_camera3.d"
    libs "x11"
-   libs "raylib"
    versions "RAYLIB_300"
    }
 configuration "ig" {
    targetName "core_input_gestures"
    sourceFiles "core_input_gestures.d"
    libs "x11"
-   libs "raylib"
    versions "RAYLIB_300"
 }
 
@@ -79,7 +68,6 @@ configuration "ig2" {
    targetName "core_input_gestures2"
    sourceFiles "core_input_gestures2.d"
    libs "x11"
-   libs "raylib"
    versions "RAYLIB_300"
 }
 
@@ -87,6 +75,5 @@ configuration "ig2" {
 configuration "arm" {
    targetName "basic-arm"
    sourceFiles "basic_window.d"
-   libs "raylib"
    dflags "-conf=ldc_arm.conf" platform="ldc"
 }
