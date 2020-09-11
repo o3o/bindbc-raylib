@@ -690,7 +690,7 @@ version (BindRaylib_Static) {
       pSetCameraMoveControls SetCameraMoveControls;
    }
 
-   static if (raylibSupport >= RaylibSupport.raylib301) {
+   static if (raylibSupport >= RaylibSupport.raylib300_70) {
       extern (C) @nogc nothrow {
          /**
           * Get window scale DPI factor

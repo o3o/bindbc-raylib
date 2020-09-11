@@ -412,7 +412,7 @@ version (BindRaylib_Static) {
       pDrawTextureNPatch DrawTextureNPatch;
    }
 
-   static if (raylibSupport == RaylibSupport.raylib301) {
+   static if (raylibSupport == RaylibSupport.raylib300_70) {
       extern (C) @nogc nothrow {
          alias pImageDrawText = void function(Image *dst, const(char)* text, int posX, int posY, int fontSize, Color color);
          alias pImageDrawTextEx = void function(Image *dst, Font font, const(char)* text, Vector2 position, float fontSize, float spacing, Color tint);
