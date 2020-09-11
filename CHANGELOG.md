@@ -1,63 +1,24 @@
 # raylib changelog
 
-
 ## [Unreleased]
 
+## [0.7.0] - 2020-09-11
 - Fix gui examples issue
-
-### ADDED
-- IsWindowFocused
-- IsWindowFullscreen
-- GetWindowScaleDPI
-- ImageClearBackground
-- ImageDrawPixel
-- ImageDrawPixelV
-- ImageDrawLine
-- ImageDrawLineV
-- ImageDrawCircle
-- ImageDrawCircleV
-- ImageDrawRectangleV
-- ImageDrawRectangleRec
-- GenTextureCubemap
-- GenTextureIrradiance
-- GenTexturePrefilter
-- GenTextureBRDF
-- IsAudioStreamProcessed
-- SetAudioStreamBufferSizeDefault
-
-### NOT YET IMPLEMENTED
-- SetTraceLogLevel
-- SetTraceLogExit
-- SetTraceLogCallback
-- TraceLog
-- GetRandomValue
-- LoadFileData
-- SaveFileData
-- LoadFileText
-- SaveFileText
-- CompressData
-- DecompressData
-- SaveStorageValue
-- LoadStorageValue
-- OpenURL
-- GetGamepadName
-- LoadFileText
-- LoadImagePro
-- Struct Music, AudioStream...
-
-### REMOVED
-- LoadWaveEx
-
-### RENAMED
-- IsAudioBufferProcessed to IsAudioStreamProcessed
-- LoadText to LoadFileText
+- Rename raylib301 to raylib300_70
 
 
-### REDESIGNED:
-- struct Font, character rectangles have been moved out from CharInfo to Font
-- struct CharInfo, now includes directly an Image of the glyph
-- struct Font, now includes directly an Image of the glyph
+## [0.6.0] - 2020-08-07
+-  Added RAYLIB_301 (raylib 3.0.0-70-g72443f8f ) Removed IsWindowFocused and GetWindowScaleDPI from RAYLIB_300
 
+## [0.5.0] - 2020-06-26
+- Update to bbc-loader 0.3.1
+- Add text_font_loading example
+
+## [0.4.0] - 2020-05-21
+- Fix #3
+
+## [0.3.0] - 2020-05-06
+- Upgrade to raylib 3.0.0
 
 ## [0.2.0] - 2020-02-19
 - Add semver
