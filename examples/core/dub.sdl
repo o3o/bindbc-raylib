@@ -9,7 +9,7 @@ targetType "executable"
 configuration "basic" {
    targetName "basic_window"
    sourceFiles "basic_window.d"
-   versions "RAYLIB_301"
+   versions "RAYLIB_300"
 }
 
 configuration "basic26" {
