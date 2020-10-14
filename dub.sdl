@@ -9,7 +9,7 @@ targetPath "bin"
 targetName "BindBC_raylib"
 
 configuration "dynamic" {
-   dependency "bindbc-loader" version="~>0.3.0"
+   dependency "bindbc-loader" version="~>0.3.2"
 }
 
 configuration "arm" {
