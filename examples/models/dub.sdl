@@ -1,0 +1,13 @@
+name "core"
+description "Models"
+authors "o3o"
+copyright "Copyright © 2020, o3o"
+dependency "bindbc-raylib" path="../.."
+targetType "executable"
+versions "RAYLIB_300" 
+
+// dub -ccts
+configuration "mmg" {
+   targetName "mmg"
+   sourceFiles "models_mesh_generation.d"
+}
