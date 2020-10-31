@@ -205,6 +205,7 @@ struct Camera2D {
 
 // Vertex data definning a mesh
 // NOTE: Data stored in CPU memory (and GPU)
+
 struct Mesh {
    int vertexCount; // Number of vertices stored in arrays
    int triangleCount; // Number of triangles stored (indexed or not)

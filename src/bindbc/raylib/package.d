@@ -10,7 +10,8 @@ public {
    import bindbc.raylib.bind.shaders;
    import bindbc.raylib.bind.audio;
    import bindbc.raylib.bind.gui;
-
+   import bindbc.raylib.bind.rlgl;
+   
    import bindbc.raylib.colors;
    import bindbc.raylib.config;
    import bindbc.raylib.dynload;
@@ -18,4 +19,5 @@ public {
    import bindbc.raylib.semver;
    import bindbc.raylib.types;
    import bindbc.raylib.wrapper;
+   
 }
