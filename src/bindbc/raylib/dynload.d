@@ -39,8 +39,11 @@ RaylibSupport loadRaylib() {
    version (Windows) {
       const(char)[][1] libNames = ["raylib.dll"];
    } else version (Posix) {
-      const(char)[][3] libNames = ["libraylib.so", "/usr/local/lib/libraylib.so" //make install PLATFORM=PLATFORM_DESKTOP RAYLIB_LIBTYPE=SHARED
-      , "/usr/lib/libraylib.so"];
+      const(char)[][3] libNames = [
+         "libraylib.so",
+         "/usr/local/lib/libraylib.so" //make install PLATFORM=PLATFORM_DESKTOP RAYLIB_LIBTYPE=SHARED
+         , "/usr/lib/libraylib.so"
+      ];
    } else {
       static assert(0, "bindbc-raylib is not yet supported on this platform");
    }
@@ -249,7 +252,6 @@ RaylibSupport loadRaylib(const(char)* libName) {
    lib.bindSymbol(cast(void**)&GetPixelDataSize, "GetPixelDataSize");
    lib.bindSymbol(cast(void**)&GetTextureData, "GetTextureData");
    lib.bindSymbol(cast(void**)&GetScreenData, "GetScreenData");
-   lib.bindSymbol(cast(void**)&UpdateTexture, "UpdateTexture");
    lib.bindSymbol(cast(void**)&ImageCopy, "ImageCopy");
    lib.bindSymbol(cast(void**)&ImageFromImage, "ImageFromImage");
    lib.bindSymbol(cast(void**)&ImageToPOT, "ImageToPOT");
@@ -484,77 +486,96 @@ RaylibSupport loadRaylib(const(char)* libName) {
    lib.bindSymbol(cast(void**)&StopAudioStream, "StopAudioStream");
    lib.bindSymbol(cast(void**)&SetAudioStreamVolume, "SetAudioStreamVolume");
    lib.bindSymbol(cast(void**)&SetAudioStreamPitch, "SetAudioStreamPitch");
-   //rlgl
 
-   lib.bindSymbol(cast(void**)&rlMatrixMode,"rlMatrixMode");
-   lib.bindSymbol(cast(void**)&rlPushMatrix,"rlPushMatrix");
-   lib.bindSymbol(cast(void**)&rlPopMatrix,"rlPopMatrix");
-   lib.bindSymbol(cast(void**)&rlLoadIdentity,"rlLoadIdentity");
-   lib.bindSymbol(cast(void**)&rlTranslatef,"rlTranslatef");
-   lib.bindSymbol(cast(void**)&rlRotatef,"rlRotatef");
-   lib.bindSymbol(cast(void**)&rlScalef,"rlScalef");
-   lib.bindSymbol(cast(void**)&rlMultMatrixf,"rlMultMatrixf");
-   lib.bindSymbol(cast(void**)&rlFrustum,"rlFrustum");
-   lib.bindSymbol(cast(void**)&rlOrtho,"rlOrtho");
-   lib.bindSymbol(cast(void**)&rlViewport,"rlViewport");
-   lib.bindSymbol(cast(void**)&rlBegin,"rlBegin");
-   lib.bindSymbol(cast(void**)&rlEnd,"rlEnd");
-   lib.bindSymbol(cast(void**)&rlVertex2i,"rlVertex2i");
-   lib.bindSymbol(cast(void**)&rlVertex2f,"rlVertex2f");
-   lib.bindSymbol(cast(void**)&rlVertex3f,"rlVertex3f");
-   lib.bindSymbol(cast(void**)&rlTexCoord2f,"rlTexCoord2f");
-   lib.bindSymbol(cast(void**)&rlNormal3f,"rlNormal3f");
-   lib.bindSymbol(cast(void**)&rlColor4ub,"rlColor4ub");
-   lib.bindSymbol(cast(void**)&rlColor3f,"rlColor3f");
-   lib.bindSymbol(cast(void**)&rlColor4f,"rlColor4f");
-   lib.bindSymbol(cast(void**)&rlEnableTexture,"rlEnableTexture");
-   lib.bindSymbol(cast(void**)&rlDisableTexture,"rlDisableTexture");
-   lib.bindSymbol(cast(void**)&rlTextureParameters,"rlTextureParameters");
-   lib.bindSymbol(cast(void**)&rlEnableShader,"rlEnableShader");
-   lib.bindSymbol(cast(void**)&rlDisableShader,"rlDisableShader");
-   lib.bindSymbol(cast(void**)&rlEnableFramebuffer,"rlEnableFramebuffer");
-   lib.bindSymbol(cast(void**)&rlDisableFramebuffer,"rlDisableFramebuffer");
-   lib.bindSymbol(cast(void**)&rlEnableDepthTest,"rlEnableDepthTest");
-   lib.bindSymbol(cast(void**)&rlDisableDepthTest,"rlDisableDepthTest");
-   lib.bindSymbol(cast(void**)&rlEnableBackfaceCulling,"rlEnableBackfaceCulling");
-   lib.bindSymbol(cast(void**)&rlDisableBackfaceCulling,"rlDisableBackfaceCulling");
-   lib.bindSymbol(cast(void**)&rlEnableScissorTest,"rlEnableScissorTest");
-   lib.bindSymbol(cast(void**)&rlDisableScissorTest,"rlDisableScissorTest");
-   lib.bindSymbol(cast(void**)&rlScissor,"rlScissor");
-   lib.bindSymbol(cast(void**)&rlEnableWireMode,"rlEnableWireMode");
-   lib.bindSymbol(cast(void**)&rlDisableWireMode,"rlDisableWireMode");
-   lib.bindSymbol(cast(void**)&rlClearColor,"rlClearColor");
-   lib.bindSymbol(cast(void**)&rlClearScreenBuffers,"rlClearScreenBuffers");
-   lib.bindSymbol(cast(void**)&rlUpdateBuffer,"rlUpdateBuffer");
-   lib.bindSymbol(cast(void**)&rlLoadAttribBuffer,"rlLoadAttribBuffer");
-   lib.bindSymbol(cast(void**)&rlglInit,"rlglInit");
-   lib.bindSymbol(cast(void**)&rlglClose,"rlglClose");
-   lib.bindSymbol(cast(void**)&rlglDraw,"rlglDraw");
-   lib.bindSymbol(cast(void**)&rlCheckErrors,"rlCheckErrors");
-   lib.bindSymbol(cast(void**)&rlGetVersion,"rlGetVersion");
-   lib.bindSymbol(cast(void**)&rlCheckBufferLimit,"rlCheckBufferLimit");
-   lib.bindSymbol(cast(void**)&rlSetDebugMarker,"rlSetDebugMarker");
-   lib.bindSymbol(cast(void**)&rlSetBlendMode,"rlSetBlendMode");
-   lib.bindSymbol(cast(void**)&rlLoadExtensions,"rlLoadExtensions");
-   lib.bindSymbol(cast(void**)&rlLoadTexture,"rlLoadTexture");
-   lib.bindSymbol(cast(void**)&rlLoadTextureDepth,"rlLoadTextureDepth");
-   lib.bindSymbol(cast(void**)&rlLoadTextureCubemap,"rlLoadTextureCubemap");
-   lib.bindSymbol(cast(void**)&rlUpdateTexture,"rlUpdateTexture");
-   lib.bindSymbol(cast(void**)&rlGetGlTextureFormats,"rlGetGlTextureFormats");
-   lib.bindSymbol(cast(void**)&rlUnloadTexture,"rlUnloadTexture");
-   lib.bindSymbol(cast(void**)&rlGenerateMipmaps,"rlGenerateMipmaps");
-   lib.bindSymbol(cast(void**)&rlReadTexturePixels,"rlReadTexturePixels");
-   lib.bindSymbol(cast(void**)&rlReadScreenPixels,"rlReadScreenPixels");
-   lib.bindSymbol(cast(void**)&rlLoadFramebuffer,"rlLoadFramebuffer");
-   lib.bindSymbol(cast(void**)&rlFramebufferAttach,"rlFramebufferAttach");
-   lib.bindSymbol(cast(void**)&rlFramebufferComplete,"rlFramebufferComplete");
-   lib.bindSymbol(cast(void**)&rlUnloadFramebuffer,"rlUnloadFramebuffer");
-   lib.bindSymbol(cast(void**)&rlLoadMesh,"rlLoadMesh");
-   lib.bindSymbol(cast(void**)&rlUpdateMesh,"rlUpdateMesh");
-   lib.bindSymbol(cast(void**)&rlUpdateMeshAt,"rlUpdateMeshAt");
-   lib.bindSymbol(cast(void**)&rlDrawMesh,"rlDrawMesh");
-   lib.bindSymbol(cast(void**)&rlDrawMeshInstanced,"rlDrawMeshInstanced");
-   lib.bindSymbol(cast(void**)&rlUnloadMesh,"rlUnloadMesh");
+   //rlgl
+   lib.bindSymbol(cast(void**)&rlMatrixMode, "rlMatrixMode");
+   lib.bindSymbol(cast(void**)&rlPushMatrix, "rlPushMatrix");
+   lib.bindSymbol(cast(void**)&rlPopMatrix, "rlPopMatrix");
+   lib.bindSymbol(cast(void**)&rlLoadIdentity, "rlLoadIdentity");
+   lib.bindSymbol(cast(void**)&rlTranslatef, "rlTranslatef");
+   lib.bindSymbol(cast(void**)&rlRotatef, "rlRotatef");
+   lib.bindSymbol(cast(void**)&rlScalef, "rlScalef");
+   lib.bindSymbol(cast(void**)&rlMultMatrixf, "rlMultMatrixf");
+   lib.bindSymbol(cast(void**)&rlFrustum, "rlFrustum");
+   lib.bindSymbol(cast(void**)&rlOrtho, "rlOrtho");
+   lib.bindSymbol(cast(void**)&rlViewport, "rlViewport");
+   lib.bindSymbol(cast(void**)&rlBegin, "rlBegin");
+   lib.bindSymbol(cast(void**)&rlEnd, "rlEnd");
+   lib.bindSymbol(cast(void**)&rlVertex2i, "rlVertex2i");
+   lib.bindSymbol(cast(void**)&rlVertex2f, "rlVertex2f");
+   lib.bindSymbol(cast(void**)&rlVertex3f, "rlVertex3f");
+   lib.bindSymbol(cast(void**)&rlTexCoord2f, "rlTexCoord2f");
+   lib.bindSymbol(cast(void**)&rlNormal3f, "rlNormal3f");
+   lib.bindSymbol(cast(void**)&rlColor4ub, "rlColor4ub");
+   lib.bindSymbol(cast(void**)&rlColor3f, "rlColor3f");
+   lib.bindSymbol(cast(void**)&rlColor4f, "rlColor4f");
+   lib.bindSymbol(cast(void**)&rlEnableTexture, "rlEnableTexture");
+   lib.bindSymbol(cast(void**)&rlDisableTexture, "rlDisableTexture");
+   lib.bindSymbol(cast(void**)&rlTextureParameters, "rlTextureParameters");
+   lib.bindSymbol(cast(void**)&rlEnableDepthTest, "rlEnableDepthTest");
+   lib.bindSymbol(cast(void**)&rlDisableDepthTest, "rlDisableDepthTest");
+   lib.bindSymbol(cast(void**)&rlEnableBackfaceCulling, "rlEnableBackfaceCulling");
+   lib.bindSymbol(cast(void**)&rlDisableBackfaceCulling, "rlDisableBackfaceCulling");
+   lib.bindSymbol(cast(void**)&rlEnableScissorTest, "rlEnableScissorTest");
+   lib.bindSymbol(cast(void**)&rlDisableScissorTest, "rlDisableScissorTest");
+   lib.bindSymbol(cast(void**)&rlScissor, "rlScissor");
+   lib.bindSymbol(cast(void**)&rlEnableWireMode, "rlEnableWireMode");
+   lib.bindSymbol(cast(void**)&rlDisableWireMode, "rlDisableWireMode");
+   lib.bindSymbol(cast(void**)&rlClearColor, "rlClearColor");
+   lib.bindSymbol(cast(void**)&rlClearScreenBuffers, "rlClearScreenBuffers");
+   lib.bindSymbol(cast(void**)&rlUpdateBuffer, "rlUpdateBuffer");
+   lib.bindSymbol(cast(void**)&rlLoadAttribBuffer, "rlLoadAttribBuffer");
+   lib.bindSymbol(cast(void**)&rlglInit, "rlglInit");
+   lib.bindSymbol(cast(void**)&rlglClose, "rlglClose");
+   lib.bindSymbol(cast(void**)&rlglDraw, "rlglDraw");
+   lib.bindSymbol(cast(void**)&rlGetVersion, "rlGetVersion");
+   lib.bindSymbol(cast(void**)&rlCheckBufferLimit, "rlCheckBufferLimit");
+   lib.bindSymbol(cast(void**)&rlSetDebugMarker, "rlSetDebugMarker");
+   lib.bindSymbol(cast(void**)&rlLoadExtensions, "rlLoadExtensions");
+   lib.bindSymbol(cast(void**)&rlLoadTexture, "rlLoadTexture");
+   lib.bindSymbol(cast(void**)&rlLoadTextureCubemap, "rlLoadTextureCubemap");
+   lib.bindSymbol(cast(void**)&rlUpdateTexture, "rlUpdateTexture");
+   lib.bindSymbol(cast(void**)&rlGetGlTextureFormats, "rlGetGlTextureFormats");
+   lib.bindSymbol(cast(void**)&rlUnloadTexture, "rlUnloadTexture");
+   lib.bindSymbol(cast(void**)&rlGenerateMipmaps, "rlGenerateMipmaps");
+   lib.bindSymbol(cast(void**)&rlReadTexturePixels, "rlReadTexturePixels");
+   lib.bindSymbol(cast(void**)&rlReadScreenPixels, "rlReadScreenPixels");
+   lib.bindSymbol(cast(void**)&rlLoadMesh, "rlLoadMesh");
+   lib.bindSymbol(cast(void**)&rlUpdateMesh, "rlUpdateMesh");
+   lib.bindSymbol(cast(void**)&rlUpdateMeshAt, "rlUpdateMeshAt");
+   lib.bindSymbol(cast(void**)&rlDrawMesh, "rlDrawMesh");
+   lib.bindSymbol(cast(void**)&rlUnloadMesh, "rlUnloadMesh");
+
+   static if (raylibSupport > RaylibSupport.raylib300_70) {
+      lib.bindSymbol(cast(void**)&rlEnableShader, "rlEnableShader");
+      lib.bindSymbol(cast(void**)&rlDisableShader, "rlDisableShader");
+      lib.bindSymbol(cast(void**)&rlEnableFramebuffer, "rlEnableFramebuffer");
+      lib.bindSymbol(cast(void**)&rlDisableFramebuffer, "rlDisableFramebuffer");
+      lib.bindSymbol(cast(void**)&rlCheckErrors, "rlCheckErrors");
+      lib.bindSymbol(cast(void**)&rlSetBlendMode, "rlSetBlendMode");
+      lib.bindSymbol(cast(void**)&rlLoadTextureDepth, "rlLoadTextureDepth");
+      lib.bindSymbol(cast(void**)&UpdateTexture, "UpdateTexture");
+      lib.bindSymbol(cast(void**)&rlLoadFramebuffer, "rlLoadFramebuffer");
+      lib.bindSymbol(cast(void**)&rlFramebufferAttach, "rlFramebufferAttach");
+      lib.bindSymbol(cast(void**)&rlFramebufferComplete, "rlFramebufferComplete");
+      lib.bindSymbol(cast(void**)&rlUnloadFramebuffer, "rlUnloadFramebuffer");
+      lib.bindSymbol(cast(void**)&rlDrawMeshInstanced, "rlDrawMeshInstanced");
+   } else {
+      // only 300 300_70
+      lib.bindSymbol(cast(void**)&rlEnableRenderTexture, "rlEnableRenderTexture");
+      lib.bindSymbol(cast(void**)&rlDisableRenderTexture, "rlDisableRenderTexture");
+      lib.bindSymbol(cast(void**)&rlDeleteTextures, "rlDeleteTextures");
+      lib.bindSymbol(cast(void**)&rlDeleteRenderTextures, "rlDeleteRenderTextures");
+      lib.bindSymbol(cast(void**)&rlDeleteShader, "rlDeleteShader");
+      lib.bindSymbol(cast(void**)&rlDeleteVertexArrays, "rlDeleteVertexArrays");
+      lib.bindSymbol(cast(void**)&rlDeleteBuffers, "rlDeleteBuffers");
+      lib.bindSymbol(cast(void**)&rlUnproject, "rlUnproject");
+      lib.bindSymbol(cast(void**)&rlLoadTextureDepth, "rlLoadTextureDepth");
+      lib.bindSymbol(cast(void**)&rlUpdateTexture, "rlUpdateTexture");
+      lib.bindSymbol(cast(void**)&rlLoadRenderTexture, "rlLoadRenderTexture");
+      lib.bindSymbol(cast(void**)&rlRenderTextureAttach, "rlRenderTextureAttach");
+      lib.bindSymbol(cast(void**)&rlRenderTextureComplete, "rlRenderTextureComplete");
+   }
 
    // gui
    version (RAYGUI) {
