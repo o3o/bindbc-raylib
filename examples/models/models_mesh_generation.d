@@ -48,7 +48,7 @@ void main() {
 
       // Set checked texture as default diffuse component for all models material
       for (int i = 0; i < NUM_MODELS; i++) {
-         writeln(models[i].materialCount);
+         writeln("mesh ", models[i].meshCount);
 
 
          Material m0 = (*(models[i].materials));
@@ -58,12 +58,14 @@ void main() {
 
          Material[] m;
          m ~= m0;
+         int[] mm;
+         mm ~= 0;
 
          writefln("%s", models[i].materials[0].maps[MAP_DIFFUSE].texture);
          models[i].materials = m.ptr;
+         models[i].meshMaterial = mm.ptr;
          writefln("%s", models[i].materials[0].maps[MAP_DIFFUSE].texture);
          writeln();
-
       }
 
       // Define the camera to look into our 3d world

@@ -1,14 +1,15 @@
 import std.stdio;
+import std.string : fromStringz;
 import bindbc.raylib;
 import loader = bindbc.loader.sharedlib;
+import std.experimental.logger;
 
 void main(string[] args) {
    RaylibSupport retVal = loadRaylib();
 
-   writeln("retVal: ", retVal);
    if (retVal != raylibSupport) {
       foreach(info; loader.errors) {
-         writefln("e: %s, m:%s", info.error, info.message);
+         error(fromStringz(info.error), ":", fromStringz(info.message));
       }
       writeln("ERROR: ", retVal);
    } else {

@@ -6,10 +6,15 @@ dependency "bindbc-raylib" path="../.."
 targetType "executable"
 
 // dub -cbasic
-configuration "basic" {
+configuration "basic300" {
    targetName "basic_window"
    sourceFiles "basic_window.d"
    versions "RAYLIB_300"
+}
+configuration "basic300_70" {
+   targetName "basic_window300_70"
+   sourceFiles "basic_window.d"
+   versions "RAYLIB_300_70"
 }
 
 configuration "basic26" {
