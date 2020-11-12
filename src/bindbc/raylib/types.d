@@ -227,13 +227,23 @@ struct Mesh {
 
    // OpenGL identifiers
    uint vaoId; // OpenGL Vertex Array Object id
-   uint[7] vboId; // OpenGL Vertex Buffer Objects id (default vertex data)
+
+   static if (raylibSupport >= RaylibSupport.raylib300) {
+      uint* vboId; // OpenGL Vertex Buffer Objects id (default vertex data)
+   } else {
+      uint[7] vboId; // OpenGL Vertex Buffer Objects id (default vertex data)
+   }
 }
 
 // Shader type (generic)
 struct Shader {
    uint id; // Shader program id
-   int[MAX_SHADER_LOCATIONS] locs; // Shader locations array
+
+   static if (raylibSupport >= RaylibSupport.raylib300) {
+      int* locs; // Shader locations array
+   } else {
+      int[MAX_SHADER_LOCATIONS] locs; // Shader locations array
+   }
 }
 
 // Material texture map
@@ -246,7 +256,13 @@ struct MaterialMap {
 // Material type (generic)
 struct Material {
    Shader shader; // Material shader
-   MaterialMap[MAX_MATERIAL_MAPS] maps; // Material maps
+
+   static if (raylibSupport >= RaylibSupport.raylib300) {
+      MaterialMap* maps; // Material maps
+   } else {
+      MaterialMap[MAX_MATERIAL_MAPS] maps; // Material maps
+   }
+
    float* params; // Material generic parameters (if required)
 }
 
