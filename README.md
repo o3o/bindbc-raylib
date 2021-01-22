@@ -13,7 +13,7 @@ You can [just compile raylib](https://github.com/o3o/bindbc-raylib/wiki/compile-
 Add the package as a dependency in your `dub.json` or `dub.sdl` package description:
 
 __dub.json__
-```
+```json
 "dependencies": {
     "bindbc-raylib": "~>0.1.0"
 }
@@ -30,7 +30,7 @@ dependency "bindbc-raylib" version="~>0.1.0"
 In order to use [raylib version](https://github.com/o3o/bindbc-raylib/wiki/use-different-version) 3.0.0:
 
 __dub.json__
-```
+```json
 "versions": [ "RAYLIB_300" ],
 ```
 
@@ -62,7 +62,7 @@ You can find [original raylib examples](https://www.raylib.com/examples.html) po
 
 A simple example:
 
-```
+```d
 import std.stdio;
 import bindbc.raylib;
 
