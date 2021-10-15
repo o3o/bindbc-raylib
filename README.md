@@ -3,7 +3,7 @@ This project provides both static (WIP) and dynamic bindings to the [raylib](htt
 See  [Wiki for more information](https://github.com/o3o/bindbc-raylib/wiki).
 
 ## Versioning
-bindbc-raylib is being [semantically versioned](http://semver.org). Roughly described, major version changes will always represent backwards incompatible changes, minor version changes will always represent new language features and will be backwards compatible, and patch ('tiny') version changes will always be bug fixes.
+bindbc-raylib is being [semantically versioned](http://semver.org). Roughly described, major version changes will always represent backwards incompatible changes, minor version changes will always represent new features and will be backwards compatible, and patch ('tiny') version changes will always be bug fixes.
 
 ## Compile raylib source code
 You can [just compile raylib](https://github.com/o3o/bindbc-raylib/wiki/compile-raylib) or also include [support for raygui](https://github.com/o3o/bindbc-raylib/wiki/compile-raygui).
