@@ -1,4 +1,7 @@
 # bindbc-raylib
+**Obsolete versions**. Use [bindbc-raylib3](https://github.com/o3o/bindbc-raylib3).
+
+
 This project provides both static (WIP) and dynamic bindings to the [raylib](https://www.raylib.com/) _a simple and easy-to-use library to enjoy videogames programming_ and [raygui](https://github.com/raysan5/raygui) _a simple and easy-to-use immediate-mode-gui library_.
 See  [Wiki for more information](https://github.com/o3o/bindbc-raylib/wiki).
 
